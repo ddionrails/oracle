@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+	<html lang="de">
+		<head>
+			<title>SOEP ORACLE</title>
+			<meta charset="utf-8">
+			
+			<!-- Bootstrap -->
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+			
+			<!-- CSS -->
+			<link rel="stylesheet" href="css/style.css" />
+			
+			<!-- Google Fonts -->
+			<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+			
+			<!-- D3.js -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+			<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		</head>
+
+		<body>
+			<!-- Navbar -->
+			<nav class = "navbar navbar-inverse">
+				<div class = "container">
+				
+					<!-- Navbar Logo -->
+					<div class="navbar-header">
+						<a href="#" class="navbar-brand">SOEP ORACLE</a>
+					</div>
+					<!-- Navbar Menu Items -->
+					<div>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">X</a></li>
+							<li><a href="#">Y</a></li>
+							<li><a href="#">Z</a></li>
+							<li><a href="#">About</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			  
+			<!-- Head -->
+			<div class="jumbotron">
+				<div class="titel"><h1>SOEP ORACLE</h1></div>
+				<span class="glyphicons glyphicons-cat"style="font-size:180px">🐈</span>
+				<p><button type="button" class="btn btn-primary btn-lg">Let's Get Started</button></p>
+			</div>
+		  
+
+  
+			<!-- About -->
+			<div class="row">
+				<div class="container">
+					<div class="col-md-12">
+						<div class="h1"><h1 >Was ist SOEP ORACLE?<h1></div>
+						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</p>
+						<hr class="half-rule">
+					</div>	
+				</div>
+			</div>
+
+  
+			<!-- User Input -->
+			<div class="row">
+				<div class="container">
+					<div class="col-md-12">
+						<div class="h1"><h1>Frage das Orakel<h1></div>
+						<div class="h4"><h4>Damit das SOEP deine Zukunft voraussagen kann, beantworte ihm zunächst einige Fragen: </h4></div>
+				
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Hast du einen Uniabschluss?</h3>
+							</div>
+							<div class="panel-body">
+								<form>
+									<input type="radio" name="uni" value="1" checked>Ja
+								<br>
+									<input type="radio" name="uni" value="0">Nein
+								</form>
+							</div>
+						</div>
+							
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Wie alt bist du?</h3>
+							</div>
+							<div class="panel-body">
+								<input id="slider1" type="range" min="0" max="100" step="1" />
+							</div>
+						</div>
+							
+						<p><button type="button" class="btn btn-primary btn-lg btn pull-right">Submit</button></p>
+						<div class="clearfix">
+							<hr class="half-rule">
+						</div>
+					</div>					
+				</div>
+			</div>
+			
+ 
+  
+			<!-- Prediction -->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="h1"><h1>Das Orakel hat gesprochen.<h1></div>
+						<div class="h4"><h4>Wie viel wirst du verdienen?</h4><div>
+						<script>			
+						
+						<!-- D3 Visualization -->
+					
+						<!-- SVG Element -->
+							var w =500;
+							var h = 500;
+							padding = 60;
+							
+							var svg = d3.select("body")
+								.append("svg")
+								.attr("width", w)
+								.attr("height", h);
+								
+							<!-- Testdata -->
+							var data= [
+											[100,100], [200,200], [300,300]
+									];
+							
+							<!-- Append Data Elements -->
+							var circles = svg.selectAll("circles")
+											.data(data)
+											.enter()
+											.append("circle")
+											.attr("class", "circles");
+							
+							<!-- Scale -->
+							var xScale = d3.scale.linear()
+											.domain([0, d3.max(data, function(d) {return d[0];})])
+											.range([padding, w-padding]);
+											
+							var yScale = d3.scale.linear()
+											.domain([0, d3.max(data, function(d) {return d[1];})])
+											.range([h-padding, padding]);
+							
+							<!-- Place Data Elements -->
+							circles.attr("cx", function(d){
+										return xScale(d[0])
+									})
+									.attr("cy", function(d){
+										return yScale(d[1])
+									})
+									.attr("r", 5);
+									
+							<!-- Axis -->				
+							var xAxis = d3.svg.axis()
+										.scale(xScale)
+										.orient("bottom")
+										.ticks(5);
+													
+							var yAxis = d3.svg.axis()
+										.scale(yScale)
+										.orient("left")
+										.ticks(5);
+										
+							<!-- Place Axis -->			
+							svg.append("g")
+								.call(xAxis)
+								.attr("transform", "translate(0," + (h-padding) +")")
+								.attr("class", "axis");
+								
+							svg.append("g")
+								.attr("class", "axis")
+								.attr("transform", "translate (" + padding + ",0)")
+								.call(yAxis);
+								
+							<!-- Axis Labels -->			
+							var xLabel = svg.append("text")
+											.attr("class", "label")
+											.attr("text-anchor", "middle")
+											.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
+											.text("Alter");
+														
+							var yLabel = svg.append("text")
+											.attr("class", "label")
+											.attr("text-anchor", "middle")
+											.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
+											.text("Einkommen");
+											
+						</script>						
+					</div>
+				</div>
+			</div>	
+			
+			<!-- Footer -->
+  
+		</body>
+	</html> 
