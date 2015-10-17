@@ -1,3 +1,3 @@
-[submodule "externals/bootsrap-slider"]
-	path = externals/bootsrap-slider
+[submodule "externals/bootstrap-slider"]
+	path = externals/bootstrap-slider
 	url = https://github.com/seiyria/bootstrap-slider.git
