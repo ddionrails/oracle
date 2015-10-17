@@ -16,9 +16,18 @@
 			<!-- Google Fonts -->
 			<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
 			
+			<!-- jQuery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+			<!-- Range Slider -->
+			<link href=".\externals\bootstrap-slider\css\bootstrap-slider.css" rel="stylesheet">
+			<script src=".\externals\bootstrap-slider\js\bootstrap-slider.js"></script>
+			
 			<!-- D3.js -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 			<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+			
 		</head>
 
 		<body>
@@ -88,14 +97,14 @@
 								<h3 class="panel-title">Wie alt bist du?</h3>
 							</div>
 							<div class="panel-body">
-								<input id="slider1" type="range" min="0" max="100" step="1" />
+									<input id="slider_age" data-slider-id="slider_age" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="40" data-slider-handle="rectangle";/>
+
 							</div>
 						</div>
-							
-						<p><button type="button" class="btn btn-primary btn-lg btn pull-right">Submit</button></p>
-						<div class="clearfix">
-							<hr class="half-rule">
+						<div class=text-right>
+							<button type="submit" class="btn btn-lg btn-primary">Submit</button>
 						</div>
+						<hr half-rule>
 					</div>					
 				</div>
 			</div>
@@ -108,8 +117,17 @@
 					<div class="col-md-12">
 						<div class="h1"><h1>Das Orakel hat gesprochen.<h1></div>
 						<div class="h4"><h4>Wie viel wirst du verdienen?</h4><div>
-						<script>			
-						
+						<div id="chart1"></div>
+						<hr half-rule>
+						<script>
+
+						<!-- Range Slider -->
+						$(document).ready(function(){
+							$('#slider_age').slider({
+								tooltip: "always"
+							});
+						});
+	
 						<!-- D3 Visualization -->
 					
 						<!-- SVG Element -->
@@ -117,10 +135,11 @@
 							var h = 500;
 							padding = 60;
 							
-							var svg = d3.select("body")
+							var svg = d3.select("#chart1")
 								.append("svg")
 								.attr("width", w)
-								.attr("height", h);
+								.attr("height", h)
+								.attr("transform", "translate(900,0)")
 								
 							<!-- Testdata -->
 							var data= [
@@ -186,8 +205,8 @@
 											.attr("text-anchor", "middle")
 											.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
 											.text("Einkommen");
-											
-						</script>						
+										
+						</script>								
 					</div>
 				</div>
 			</div>	
