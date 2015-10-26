@@ -20,6 +20,7 @@
 		<body>
 			<h3>Testdata</h3>			
 			<div id="chart1"></div>
+			<div id="test"></div>
 		
 			<script>
 	
@@ -38,12 +39,18 @@
 				
 				// Create testdata for variables age + income
 				
-				var age = d3.range(1,100+1); // creates Array age=[0, ..., 100]
+				// TestUser Input
+				var userAge = 30;
+				var userUni = false;
+				var ageFuture = 40;
 				
+			
+				var age = d3.range(1,100+1); // creates Array age=[0, ..., 100]
+								
 				el = [];
 				var income = [];		
 				for(i = 0; i < age.length; i++) {
-					el = age[i]+10; // will be modified later
+					el = 1000 + age[i] * 1000 + userUni * 1000; // will be modified later
 					income.push(el); 
 				}
 									
@@ -52,10 +59,33 @@
 					el = [age[i], income[i]];
 					data.push(el);
 				}
-
-				for(i=0; i < data.length; i++) {
-					console.log(data[i]);
+		
+		
+				// Some test functions
+				function funcUni(userUni){
+					if(this == true){
+						return "ja";
+					}
+					else {
+						return "nein";
+					}
 				}
+
+				function incomeAgeX(data, ageFuture){
+					for(i=0; i< data.length; i++) {
+						if(data[i][0] == ageFuture){
+							return data[i][1];
+						}						
+					}
+				}
+				
+				
+				document.getElementById("test").innerHTML = "Dein aktuelles Alter: " + userAge + "<br/>";
+				document.getElementById("test").innerHTML += "Hochschulabschluss: " + funcUni(userUni)+ "<br/>";
+				document.getElementById("test").innerHTML += "Dein Einkommen wenn du " + ageFuture + " bist: " + incomeAgeX(data, ageFuture);
+				
+				
+					
 				
 						<!-- D3 Visualization -->
 					
@@ -63,6 +93,7 @@
 							var w = 500;
 							var h = 500;
 							padding = 60;
+
 							
 							var svg = d3.select("#chart1")
 								.append("svg")
@@ -103,11 +134,14 @@
 										.scale(xScale)
 										.orient("bottom")
 										.ticks(10);
+										
 													
 							var yAxis = d3.svg.axis()
 										.scale(yScale)
 										.orient("left")
-										.ticks(10);
+										.ticks(10)
+										.tickFormat(d3.format("s"));
+							
 										
 							<!-- Place Axis -->			
 							svg.append("g")
