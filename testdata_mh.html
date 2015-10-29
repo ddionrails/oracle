@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+	<html lang="de">
+		<head>
+			<title>Testdata</title>
+			<meta charset="utf-8">
+		
+			<!-- jQuery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+			<!-- Range Slider -->
+			<link href=".\externals\bootstrap-slider\css\bootstrap-slider.css" rel="stylesheet">
+			<script src=".\externals\bootstrap-slider\js\bootstrap-slider.js"></script>
+			
+			<!-- D3.js -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+			<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>			
+		</head>
+
+		<body>
+			<h3>Testdata</h3>			
+			<div id="chart1"></div>
+			<div id="test"></div>
+		
+			<script>
+	
+				/* Doesn't work
+	
+				// Get User Input by range slider and store value in variable 
+				var mySlider = $("#ex1").slider();
+				var valueAge = mySlider.slider("getValue"); 
+				console.log(valueAge);
+				
+				// Get value of Radio buttons			
+				var checked_radio = $("input:radio[name=sex]:checked").val();
+				console.log(checked_radio)
+
+				*/
+				
+				// Create testdata for variables age + income
+				
+				// TestUser Input
+				var userAge = 30;
+				var userUni = false;
+        var input = {
+          "coef": 1,
+          "age": 30,
+          "uni": false
+        }
+        var model = {
+          "coef": 1000,
+          "uni": 1000,
+          "age": 1000
+        }
+
+        var model = {
+          "coef": {
+             "predictor": 1000,
+             "label": "Coefficient",
+             "default": 1,
+             "class": "hidden"
+          },
+          "uni": {
+            "predictor": 1000,
+            "label": "University degree",
+            "scale": "binary"
+          },
+          "age": {
+            "predictor": 1000,
+            "label": "Age",
+            "scale": "integer"
+          }
+        }
+				var ageFuture = 40;
+				
+			
+				var age = d3.range(1,100+1); // creates Array age=[0, ..., 100]
+								
+				el = [];
+				var output["income"] = [];		
+				for(i = 0; i < age.length; i++) {
+					el = model["coef"] + age[i] * model["age"] + data["uni"] *
+          model["uni"]; // will be modified later
+					output["income"].push(el); 
+				}
+									
+				data = [];
+				for(i=0; i < age.length; i++) {
+					el = [age[i], output["income"][i]];
+					data.push(el);
+				}
+		
+		
+				// Some test functions
+				function funcUni(userUni){
+					if(this == true){
+						return "ja";
+					}
+					else {
+						return "nein";
+					}
+				}
+
+				function incomeAgeX(data, ageFuture){
+					for(i=0; i< data.length; i++) {
+						if(data[i][0] == ageFuture){
+							return data[i][1];
+						}						
+					}
+				}
+				
+				
+				document.getElementById("test").innerHTML = "Dein aktuelles Alter: " + userAge + "<br/>";
+				document.getElementById("test").innerHTML += "Hochschulabschluss: " + funcUni(userUni)+ "<br/>";
+				document.getElementById("test").innerHTML += "Dein Einkommen wenn du " + ageFuture + " bist: " + incomeAgeX(data, ageFuture);
+				
+				
+					
+				
+						<!-- D3 Visualization -->
+					
+						<!-- SVG Element -->
+							var w = 500;
+							var h = 500;
+							padding = 60;
+
+							
+							var svg = d3.select("#chart1")
+								.append("svg")
+								.attr("width", w)
+								.attr("height", h);
+
+							
+							<!-- Append Data Elements -->
+							var line = svg.selectAll("line")
+											.data(data)
+											.enter()
+											.append("circle")
+											.attr("class", "line");
+							
+							<!-- Scale -->
+							var xScale = d3.scale.linear()
+											.domain([0, d3.max(data, function(d) {return d[0];})])
+											.range([padding, w-padding]);
+											
+							var yScale = d3.scale.linear()
+											.domain([0, d3.max(data, function(d) {return d[1];})])
+											.range([h-padding, padding]);
+							
+							<!-- Place Data Elements -->
+							var lineFunc = d3.svg.line()
+											.x(function(d) {return xScale(d[0]); })
+											.y(function(d) {return yScale(d[1]); })
+											.interpolate("basis");
+											
+							svg.append("svg:path")
+								.attr("d", lineFunc(data))
+								.attr("stroke", "green")
+								.attr("stroke-width", 2)
+								.attr("fill", "none");
+											
+							<!-- Axis -->				
+							var xAxis = d3.svg.axis()
+										.scale(xScale)
+										.orient("bottom")
+										.ticks(10);
+										
+													
+							var yAxis = d3.svg.axis()
+										.scale(yScale)
+										.orient("left")
+										.ticks(10)
+										.tickFormat(d3.format("s"));
+							
+										
+							<!-- Place Axis -->			
+							svg.append("g")
+								.call(xAxis)
+								.attr("transform", "translate(0," + (h-padding) +")")
+								.attr("class", "axis");
+								
+							svg.append("g")
+								.attr("class", "axis")
+								.attr("transform", "translate (" + padding + ",0)")
+								.call(yAxis);
+								
+							<!-- Axis Labels -->			
+							var xLabel = svg.append("text")
+											.attr("class", "label")
+											.attr("text-anchor", "middle")
+											.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
+											.text("Einkommen");
+														
+							var yLabel = svg.append("text")
+											.attr("class", "label")
+											.attr("text-anchor", "middle")
+											.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
+											.text("Alter");
+										
+				
+
+				/*
+				// Range Slider
+				
+				$(document).ready(function(){
+					$('#ex1').slider({
+								tooltip: "always"
+							
+							});
+						});
+				*/
+				</script>
+		</body>
+	</html> 
