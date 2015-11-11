@@ -116,48 +116,44 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12"></div>
-						<div id="test_catch_Input"></div>
-						<div id="test_add_header"></div>
-						<div id="chart1"></div>					
-						<hr half-rule>
+						<div id="load_new_header"></div>
+							<div id="chart1"></div>					
+						
 						<script>
 						
-					
+
 						<!-- Listener on submit button -->
 						$("#submit").click(function() {
 						
+							<!-- Read Input Data -->
+							var uni = $('input[name=uni]:checked', '#university').val(); 
+							var age = document.getElementById("age").value;
+
+							$('#load_new_header').load('new_header.html');
+							
+								
 						
-						newText = d3.select("#test_add_header")
-									.append("text")
-									.attr("class", "h1")
-									.text("Das Orakel hat gesprochen.")
-									.text("Wie viel wirst du verdienen?");
-						
-						
-						<!-- Read Input Data -->
-						var uni = $('input[name=uni]:checked', '#university').val(); 
-						var age = document.getElementById("age").value;
-						document.getElementById("test_catch_Input").innerHTML = uni + "<br/>"; // only for testing
-						document.getElementById("test_catch_Input").innerHTML += age + "<br/>";
-	
-						
-						var age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
+						age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
 						el = [];
 						var income = [];		
 						for(i = 0; i < age.length; i++) {
 							el = 1000+ age[i] * 1000 + uni*1000; // will be modified later
 							income.push(el); 
 						}
-											
+									
+					
+						
 						data = [];
 						for(i=0; i < age.length; i++) {
 							el = [age[i], income[i]];
 							data.push(el);
-						}	
-											
-	
+						}
+						
+						
 						<!-- D3 Visualization -->
 					
+						d3.select("svg").remove();
+						
 						<!-- SVG Element -->
 							var w =500;
 							var h = 500;
@@ -227,8 +223,12 @@
 											.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
 											.text("Alter");
 							
+						
 						});	
-						</script>								
+
+					</script>
+
+				
 					</div>
 				</div>
 			</div>	
