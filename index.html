@@ -20,13 +20,9 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		
-			<!-- Range Slider -->
-			<link href=".\externals\bootstrap-slider\css\bootstrap-slider.css" rel="stylesheet">
-			<script src=".\externals\bootstrap-slider\js\bootstrap-slider.js"></script>
-			
 			<!-- D3.js -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-			<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+			<script src="http://d3js.org/d3.v3.min.js"></script>
 			
 		</head>
 
@@ -81,14 +77,14 @@
 				
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">Hast du einen Uniabschluss?</h3>
+								<h3 class="panel-title">Welches Geschlecht haben Sie?</h3>
 							</div>
 							<div class="panel-body">
-								<div id="university">
+								<div id="sex">
 									<form>
-										<input type="radio" name="uni" value="1" checked>Ja
+										<input type="radio" name="sex" value="1" checked>Männlich
 									<br>
-										<input type="radio" name="uni" value="0">Nein
+										<input type="radio" name="sex" value="0">Weiblich
 									</form>
 								</div>
 							</div>
@@ -96,12 +92,65 @@
 							
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">Wie alt bist du?</h3>
+								<h3 class="panel-title">Wie groß sind Sie? </h3>
 							</div>
 							<div class="panel-body">
-								<input id="age" type="number" min="0" max="100" step="1" value="23">
+								<input id="age" type="number" min="0" max="200" step="1" value="160"> cm
 							</div>
 						</div>
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Was ist Ihr höchster Bildungsabschluss?</h3>
+							</div>
+							<div class="panel-body">
+								<div id="school">
+								<form>
+										<input type="radio" name="school" value="0" checked>kein Schulabschluss
+									<br>
+										<input type="radio" name="school" value="1">Hauptschulabschluss
+									<br>
+										<input type="radio" name="school" value="3">Realsschulabschluss
+									<br>
+										<input type="radio" name="school" value="4">Allgemeine Hochschulreife
+									<br>
+										<input type="radio" name="school" value="5">Hochschulabschluss		     
+								</form>
+								</div>
+							</div>
+						</div>
+								
+							<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Was trifft auf Ihre derzeitige Erwerbstätigkeit zu?</h3>
+							</div>
+							<div class="panel-body">
+								<select name="work">
+								<option value="1">Voll erwerbstätig</option>
+								  <option value="2">In Teilzeitbeschäftigung</option>
+								  <option value="3">In Ausbildung</option>
+								  <option value="4">In Rente</option> 
+								  <option value="5">Nicht erwerbstätig</option>
+								</select>
+							
+							</div>
+						</div>
+						
+						<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Welche Haustiere besitzen Sie?</h3>
+						</div>
+						<div class="panel-body">
+							<form>
+								<input type="checkbox" name="pet1" value="1">Katze
+							<br>
+								<input type="checkbox" name="pet2" value="2">Hund
+							<br>
+								<input type="checkbox" name="pet3" value="3">Vogel							
+							</form>	
+						</div>
+						</div>
+						
 						<div class=text-right>
 							<button id="submit" type="submit" class="btn btn-lg btn-primary">Submit</button>
 						</div>
@@ -126,7 +175,7 @@
 						$("#submit").click(function() {
 						
 							<!-- Read Input Data -->
-							var uni = $('input[name=uni]:checked', '#university').val(); 
+							var school = $('input[name=school]:checked', '#school').val(); 
 							var age = document.getElementById("age").value;
 
 							$('#load_new_header').load('new_header.html');
@@ -137,7 +186,7 @@
 						el = [];
 						var income = [];		
 						for(i = 0; i < age.length; i++) {
-							el = 1000+ age[i] * 1000 + uni*1000; // will be modified later
+							el = 1000+ age[i] * 1000 + school*1000; // will be modified later
 							income.push(el); 
 						}
 									
