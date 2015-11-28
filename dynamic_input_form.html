@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+	<html lang="de">
+		<head>
+			<title>SOEP ORACLE</title>
+			<meta charset="utf-8">
+			
+			<!-- Bootstrap -->
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+			
+			<!-- CSS -->
+			<link rel="stylesheet" href="css/style.css" />
+			
+			<!-- Google Fonts -->
+			<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+			
+			<!-- jQuery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+			<!-- D3.js -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+			<script src="http://d3js.org/d3.v3.min.js"></script>
+			
+		</head>
+
+		<body>
+
+			<div id="inputFormHere"></div>
+
+
+			<script>
+			
+			/*
+			myCSVInput = parseCSV("./inputForm");
+			console.log(myCSVInput);
+			*/
+			
+			var inputForm = {
+				form1: {
+					id:"",
+					type:"radio",
+					name:"sex",
+					value:[0,1],
+					label:["Männlich", "Weiblich"],	
+					text: "Sind Sie männlich oder weiblich?",
+					},
+				form2: {
+					id:"age",
+					type:"number",
+					name:"",
+					min:0,
+					max:200,
+					step:1,
+					value:160,
+					label:["cm"],	
+					text: "Wie groß sind Sie?"
+				},
+				form3: {
+					id: "school",
+					type:"radio",
+					name:"school",
+					value:[0,1,2,3,4],
+					label:["a", "b", "c", "d", "e"],	
+					text: "Was ist ihr Lieblingsbuchstabe?",
+				},
+				form4: {
+					type:"checkbox",
+					name:"abc",
+					value:[0,1,2,3,4],
+					label:["a", "b", "c", "d", "e"],	
+					text: "Das ist eine Multiple Choice Frage.",
+				},
+				
+				
+			};
+		
+			var keys = [];
+			for(var key in inputForm){
+				keys.push(key);
+			}
+			
+			for(i in keys){
+				var xyz = d3.select("#inputFormHere");
+						xyz.append("div")
+							.attr("id", keys[i]);
+			}
+		
+			function createForm(inputForm) {
+				for (i in keys) {		
+					var abc = d3.select("#"+keys[i]+"");
+						abc.append("h3")
+							.text(inputForm[keys[i]].text);
+							
+						abc.append("form")
+							.html(switchCase(keys[i].type));
+				}
+			}
+		
+			function createNumber(key) {
+				return "<input type= 'number' min = " +inputForm[key].min + "valueMax = " + inputForm[key].max + "step=" + inputForm[key].step + "value=" + inputForm[key].value + ">" + inputForm[key].label			};
+			
+			function createRadio(key) {
+				var valueMax = Math.max.apply(Math, inputForm[key].value);
+				//var valueMax2 = Math.valueMax.apply(Math, inputForm[key].label);
+				var htmlString = "";
+				var htmlString2 = "";
+				for(i = 0; i <= valueMax; i++){
+						//for(j = 0; j < valueMax2; j++)
+						htmlString = "<input type = 'radio' name = " + inputForm[key].name + " value = " + inputForm[key].value[i] + "checked>"+inputForm[key].label[i]+" <br>"
+						htmlString2 += htmlString;
+						
+					};
+					return htmlString2;
+				};
+				
+			function createCheckbox(key) {
+				var valueMax = Math.max.apply(Math, inputForm[key].value);
+				var htmlString = "";
+				var htmlString2 = "";
+				for(i = 0; i <= valueMax; i++){
+				htmlString = "<input type = 'checkbox' name = " + inputForm[key].name[i] + " value = " + inputForm[key].value[i] + "checked>"+inputForm[key].label[i]+" <br>" 
+				htmlString2 += htmlString;
+				}
+				return htmlString2;
+			};	
+							
+			function switchCase(abc){
+			
+				switch(inputForm[keys[i]].type){
+					case "radio": 		return createRadio(keys[i])
+										break;
+					case "number":		return createNumber(keys[i])
+										break;
+					case "checkbox":	return createCheckbox(keys[i])
+										break;				
+				};
+			}		
+			
+			createForm(inputForm);
+
+
+			</script>
+		</body>
+	</html>
+		
+		
