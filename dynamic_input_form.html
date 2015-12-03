@@ -33,14 +33,55 @@
 		<body>
 
 			<div id="inputFormHere"></div>
-
+			
+			
+			<!-- Hard coded Input forms for testing -->
+			
+			<div id="sex">
+				<form>
+					<input type="radio" name="sex" value="1" checked>Männlich
+				<br>
+					<input type="radio" name="sex" value="0">Weiblich
+				</form>
+			</div>
+			
+				<input id="size" name="size" type="number" min="0" max="200" step="1" value="160"> cm
+				
+		
+				<form>
+					<input  type="checkbox" name="pet" value="1" id="katze">Katze
+				<br>
+					<input type="checkbox" name="pet" value="2" id="hund">Hund
+				<br>
+					<input type="checkbox" name="pet" value="3" id="vogel">Vogel							
+				</form>	
+							
+				<div id="school">
+					<form>
+						<input type="radio" name="school" value="0" checked>kein Schulabschluss
+					<br>
+						<input type="radio" name="school" value="1">Hauptschulabschluss
+					<br>
+						<input type="radio" name="school" value="3">Realsschulabschluss
+					<br>
+						<input type="radio" name="school" value="4">Allgemeine Hochschulreife
+					<br>
+						<input type="radio" name="school" value="5">Hochschulabschluss		     
+					</form>
 
 			<script>
 			
-			/*
-			myCSVInput = parseCSV("./inputForm");
-			console.log(myCSVInput);
-			*/
+			/** Read CSV Data
+			
+			var dataset;
+
+			d3.csv("inputForm.csv", function(data) {
+				dataset = data; 
+				console.log(data);
+			});
+			
+			**/
+			
 			
 			var inputForm = {
 				form1: {
@@ -52,9 +93,9 @@
 					text: "Sind Sie männlich oder weiblich?",
 					},
 				form2: {
-					id:"age",
+					id:"size",
 					type:"number",
-					name:"",
+					name:"size",
 					min:0,
 					max:200,
 					step:1,
@@ -72,7 +113,7 @@
 				},
 				form4: {
 					type:"checkbox",
-					name:"abc",
+					name:"pet",
 					value:[0,1,2,3,4],
 					label:["a", "b", "c", "d", "e"],	
 					text: "Das ist eine Multiple Choice Frage.",
@@ -107,9 +148,92 @@
 				school:1,
 			}
 			
-			computeRegressionModels(regressionModel);
-			createInputForms(inputForm);
-
+			var emptyInput = {
+			
+				sex: null,
+				pet: [],
+				school: null,
+				size:null,
+			
+			}
+			
+				
+	
+	
+		
+		/** Generate empty Object
+		/* 	Define empty property by Input form name
+		/**
+		
+		var test = {};
+		function abc(inputform){
+		
+			for(i in key){
+				var name = inputForm[keys[i]].name;
+				test[name] = null;
+			}
+		}
+		**/
+				
+			
+			
+		/**	
+		computeRegressionModels(regressionModel);
+		createInputForms(inputForm);
+		**/	
+				
+		/** Catch User Input **/		
+		function multipleChoice(){
+			var checkedValue = [];
+				$.each($("input[name="+ inputForm[keys[i]].name+"]:checkbox:checked"), function(){            
+				checkedValue.push($(this).val());
+			});
+			return checkedValue;
+		};
+			
+		function singleChoice(){
+			var checkedValue = $("input[name="+ inputForm[keys[i]].name +"]:radio:checked").val();
+			return checkedValue;
+		};
+			
+		function getNumber(){
+			var value = $("#"+ inputForm[keys[i]].id).val();
+			return value;
+		};
+	
+			
+			
+			
+			
+			
+		/** Read Keys of Object inputForm which defindes Input Forms
+		/*
+		**/
+		var keys = [];
+		for(var key in inputForm){
+			keys.push(key);
+		};
+		
+		
+		/** Add catched User Input to empty object **/
+		function organizeUserInput(inputForm) {
+			for (i in keys) {
+				switch(inputForm[keys[i]].type){
+				case "radio": 		emptyInput[inputForm[keys[i]].name] = singleChoice();
+									break;
+				case "number":		emptyInput[inputForm[keys[i]].name] = getNumber();
+									break;
+				case "checkbox":	emptyInput[inputForm[keys[i]].name].push(multipleChoice());
+									break;				
+			};
+		};
+		}
+	
+	organizeUserInput(inputForm);
+	console.log(emptyInput);
+			
+			
+			
 			</script>
 		</body>
 	</html>
