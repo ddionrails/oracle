@@ -35,10 +35,11 @@ function createInputForms(inputForm){
 	
 	/** Returns the html code for input form type number **/
 	function createNumber(key) {
-		return "<input type= 'number' min = " +inputForm[key].min + "valueMax = " 
-				+ inputForm[key].max + "step=" + inputForm[key].step + "value=" 
-				+ inputForm[key].value + ">" + inputForm[key].label};
-	
+		return "<input type= number id = "+ inputForm[key].id + " name = " + inputForm[key].name + " min = " +inputForm[key].min + " max = " 
+				+ inputForm[key].max + " step = " + inputForm[key].step + " value = "  
+				+ inputForm[key].value + ">" + inputForm[key].label
+	};
+
 	/** Returns the html code for input form type radio (Single Choice) **/
 	function createRadio(key) {
 		var valueMax = Math.max.apply(Math, inputForm[key].value);
@@ -48,8 +49,7 @@ function createInputForms(inputForm){
 		
 		for(i = 0; i <= valueMax; i++){
 			//for(j = 0; j < valueMax2; j++)
-			htmlString = "<input type = 'radio' name = " + inputForm[key].name + " value = " 
-			+ inputForm[key].value[i] + "checked>"+inputForm[key].label[i]+" <br>"
+			htmlString = "<input type = radio name = " + inputForm[key].name + " value = " + inputForm[key].value[i] + ">"+inputForm[key].label[i]+" <br>"
 			
 			htmlString2 += htmlString;
 		};
@@ -63,8 +63,8 @@ function createInputForms(inputForm){
 		var htmlString2 = "";
 		
 		for(i = 0; i <= valueMax; i++){
-		htmlString = "<input type = 'checkbox' name = " + inputForm[key].name[i] + " value = " 
-		+ inputForm[key].value[i] + "checked>"+inputForm[key].label[i]+" <br>" 
+		htmlString = "<input type = 'checkbox' name = " + inputForm[key].name + " value = " 
+		+ inputForm[key].value[i] + ">"+inputForm[key].label[i]+" <br>" 
 		
 		htmlString2 += htmlString;
 		}
@@ -86,16 +86,6 @@ function createInputForms(inputForm){
 								break;				
 		};
 	}
-
-	/** Define Object for catched user Input 
-	
-	var test = {};
-	for(i in key){
-		test[inputForm[keys[i]].name] = null;
-	}
-	
-	console.log(test);
-	**/		
 	
 	createForm(inputForm);
 }

@@ -4,11 +4,16 @@
 			<title>SOEP ORACLE</title>
 			<meta charset="utf-8">
 			
+			
+			<!-- jQuery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
 			<!-- Bootstrap -->
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 			
 			<!-- CSS -->
 			<link rel="stylesheet" href="css/style.css" />
@@ -16,10 +21,6 @@
 			<!-- Google Fonts -->
 			<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
 			
-			<!-- jQuery -->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		
 			<!-- D3.js -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 			<script src="http://d3js.org/d3.v3.min.js"></script>
@@ -27,62 +28,46 @@
 			<!-- Javascripts -->
 			<script src="compute_regressionModels.js"></script>
 			<script src="create_InputForms.js"></script>
+			<script src="catch_userInput.js"></script>
 			
 		</head>
 
 		<body>
 
 			<div id="inputFormHere"></div>
-			
-			
-			<!-- Hard coded Input forms for testing -->
-			
-			<div id="sex">
-				<form>
-					<input type="radio" name="sex" value="1" checked>Männlich
-				<br>
-					<input type="radio" name="sex" value="0">Weiblich
-				</form>
+			<div class=text-right>
+				<button id="submit" type="submit" class="btn btn-lg btn-primary">Submit</button>
 			</div>
-			
-				<input id="size" name="size" type="number" min="0" max="200" step="1" value="160"> cm
-				
-		
-				<form>
-					<input  type="checkbox" name="pet" value="1" id="katze">Katze
-				<br>
-					<input type="checkbox" name="pet" value="2" id="hund">Hund
-				<br>
-					<input type="checkbox" name="pet" value="3" id="vogel">Vogel							
-				</form>	
-							
-				<div id="school">
-					<form>
-						<input type="radio" name="school" value="0" checked>kein Schulabschluss
-					<br>
-						<input type="radio" name="school" value="1">Hauptschulabschluss
-					<br>
-						<input type="radio" name="school" value="3">Realsschulabschluss
-					<br>
-						<input type="radio" name="school" value="4">Allgemeine Hochschulreife
-					<br>
-						<input type="radio" name="school" value="5">Hochschulabschluss		     
-					</form>
-
+						
+						
 			<script>
 			
-			/** Read CSV Data
+			/** Read CSV Data **/
 			
-			var dataset;
+		
+			
 
-			d3.csv("inputForm.csv", function(data) {
-				dataset = data; 
-				console.log(data);
-			});
+/**
+var emptyInput = {};
+	function addKeys(inputForm){
+		emptyInput[coefficient] = 1;
+		for(i in keys){
+			var key = inputForm[keys[i]].name;
+			emptyInput[key]= null;
+		};
+	};
 			
-			**/
-			
-			
+			var myInput = {};
+			var key = "hallo";
+			var key3 = "abc"
+			myInput[key[key3]] = 2;
+			myInput[key3] = 44;
+			//myInput[hallo[id]] = 23;
+			console.log(myInput);
+**/			
+
+		/** 1) Read CSV to define Input Forms **/
+	
 			var inputForm = {
 				form1: {
 					id:"",
@@ -103,26 +88,67 @@
 					label:["cm"],	
 					text: "Wie groß sind Sie?"
 				},
+				/**
 				form3: {
-					id: "school",
+					id: "letter",
 					type:"radio",
-					name:"school",
+					name:"letter",
 					value:[0,1,2,3,4],
 					label:["a", "b", "c", "d", "e"],	
 					text: "Was ist ihr Lieblingsbuchstabe?",
 				},
 				form4: {
 					type:"checkbox",
-					name:"pet",
+					name:"multiple",
 					value:[0,1,2,3,4],
 					label:["a", "b", "c", "d", "e"],	
 					text: "Das ist eine Multiple Choice Frage.",
-				},
+				},**/
 				
 				
 			};
 			
-			var regressionModel = {
+			/** 2) Read second CSV to define Regression Models **/
+			
+			var dataset;
+			var abc = {};
+			var j;
+			
+			d3.csv("inputForm.csv", function(data) {
+				dataset = data; 
+				console.log(loadRegressionModel(dataset));
+			});
+
+			function loadRegressionModel(dataset){
+				for(var i = 0; i < dataset.length; i++){
+					if(!abc.hasOwnProperty(dataset[i].key)){
+						abc[dataset[i].key] = {};
+						j = i;
+						while(j < dataset.length && dataset[i].key == dataset[j].key){
+							abc[dataset[i].key][dataset[j].property] = dataset[j].value;
+							++j;
+						};
+					};
+				};
+				return abc;
+			};
+			
+			
+			/** 3) Create Input Forms **/
+			createInputForms(inputForm);
+			
+			/** 4) Catch Input by Submit Button **/
+			$("#submit").click(function() {
+				var y = catch_userInput(); // Übergabe klappt nicht
+				
+				/** 5) Compute RegressionModels **/
+				computeRegressionModels(y, abc);
+				
+				/** 6) Draw Diagrams **/
+				
+			});
+			
+			/**var regressionModel = {
 
 				income: {
 					coefficient: 1000,
@@ -140,97 +166,21 @@
 					school: 400,
 				},
 				
-			}
+			}**/
 			
+			/*
 			var input = {
 				coefficient: 1,
 				sex:5,
 				school:1,
 			}
-			
-			var emptyInput = {
-			
-				sex: null,
-				pet: [],
-				school: null,
-				size:null,
-			
-			}
-			
-				
-	
-	
+			*/
 		
-		/** Generate empty Object
-		/* 	Define empty property by Input form name
-		/**
-		
-		var test = {};
-		function abc(inputform){
-		
-			for(i in key){
-				var name = inputForm[keys[i]].name;
-				test[name] = null;
-			}
-		}
-		**/
-				
-			
-			
 		/**	
-		computeRegressionModels(regressionModel);
-		createInputForms(inputForm);
-		**/	
-				
-		/** Catch User Input **/		
-		function multipleChoice(){
-			var checkedValue = [];
-				$.each($("input[name="+ inputForm[keys[i]].name+"]:checkbox:checked"), function(){            
-				checkedValue.push($(this).val());
-			});
-			return checkedValue;
-		};
-			
-		function singleChoice(){
-			var checkedValue = $("input[name="+ inputForm[keys[i]].name +"]:radio:checked").val();
-			return checkedValue;
-		};
-			
-		function getNumber(){
-			var value = $("#"+ inputForm[keys[i]].id).val();
-			return value;
-		};
-	
-			
-			
-			
-			
-			
-		/** Read Keys of Object inputForm which defindes Input Forms
-		/*
-		**/
-		var keys = [];
-		for(var key in inputForm){
-			keys.push(key);
-		};
+		; 	**/
 		
 		
-		/** Add catched User Input to empty object **/
-		function organizeUserInput(inputForm) {
-			for (i in keys) {
-				switch(inputForm[keys[i]].type){
-				case "radio": 		emptyInput[inputForm[keys[i]].name] = singleChoice();
-									break;
-				case "number":		emptyInput[inputForm[keys[i]].name] = getNumber();
-									break;
-				case "checkbox":	emptyInput[inputForm[keys[i]].name].push(multipleChoice());
-									break;				
-			};
-		};
-		}
-	
-	organizeUserInput(inputForm);
-	console.log(emptyInput);
+		
 			
 			
 			

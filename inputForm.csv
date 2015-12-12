@@ -1,2 +1,7 @@
-a,b,c
-1,2,3
+key,property,value
+income,coefficient,1000
+income,sex,500
+income,size,200
+satisfaction,coefficient,30
+satisfaction,sex,40
+satisfaction,size,20
