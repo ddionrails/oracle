@@ -91,7 +91,6 @@ var emptyInput = {};
 				/**
 				form3: {
 					id: "letter",
-					type:"radio",
 					name:"letter",
 					value:[0,1,2,3,4],
 					label:["a", "b", "c", "d", "e"],	
@@ -113,25 +112,25 @@ var emptyInput = {};
 			var dataset;
 			var abc = {};
 			var j;
-			
-			d3.csv("inputForm.csv", function(data) {
-				dataset = data; 
-				console.log(loadRegressionModel(dataset));
-			});
 
-			function loadRegressionModel(dataset){
-				for(var i = 0; i < dataset.length; i++){
-					if(!abc.hasOwnProperty(dataset[i].key)){
-						abc[dataset[i].key] = {};
+			function loadRegressionModel(d1){
+				for(var i = 0; i < d1.length; i++){
+					if(!abc.hasOwnProperty(d1[i].key)){
+						abc[d1[i].key] = {};
 						j = i;
-						while(j < dataset.length && dataset[i].key == dataset[j].key){
-							abc[dataset[i].key][dataset[j].property] = dataset[j].value;
+						while(j < d1.length && d1[i].key == d1[j].key){
+							abc[d1[i].key][d1[j].property] = d1[j].value;
 							++j;
 						};
 					};
 				};
 				return abc;
 			};
+			
+			d3.csv("inputForm.csv", function(data) {
+				dataset = data; 
+				console.log(loadRegressionModel(dataset));
+			});
 			
 			
 			/** 3) Create Input Forms **/
