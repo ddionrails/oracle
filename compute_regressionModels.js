@@ -2,9 +2,6 @@
 
 function computeRegressionModels(emptyInput, regressionModel){
 	
-	console.log("User Input: " + emptyInput);
-	console.log("regressionModel: " + regressionModel);
-	
 	var outputRegressions = {};
 
 	for (key in regressionModel){

@@ -32,9 +32,16 @@ function createInputForms(inputForm){
 							.html(chooseInputType(keys[i].type));
 				}
 			}
+			
 	
 	/** Returns the html code for input form type number **/
 	function createNumber(key) {
+		
+		inputForm[key].max = parseInt(inputForm[key].max);
+		inputForm[key].min = parseInt(inputForm[key].min);
+		inputForm[key].step = parseInt(inputForm[key].step);
+		inputForm[key].value = parseInt(inputForm[key].value);
+			
 		return "<input type= number id = "+ inputForm[key].id + " name = " + inputForm[key].name + " min = " +inputForm[key].min + " max = " 
 				+ inputForm[key].max + " step = " + inputForm[key].step + " value = "  
 				+ inputForm[key].value + ">" + inputForm[key].label
@@ -42,6 +49,11 @@ function createInputForms(inputForm){
 
 	/** Returns the html code for input form type radio (Single Choice) **/
 	function createRadio(key) {
+		
+		for(i = 0; i < inputForm[key].value.length; i++){
+			inputForm[key].value[i] = parseInt(inputForm[key].value[i]);
+		}
+		
 		var valueMax = Math.max.apply(Math, inputForm[key].value);
 		//var valueMax2 = Math.valueMax.apply(Math, inputForm[key].label);
 		var htmlString = "";
@@ -58,6 +70,11 @@ function createInputForms(inputForm){
 	
 	/** Returns the html code for input form type checkbox (Multiple Choice) **/		
 	function createCheckbox(key) {
+		
+		for(i = 0; i < inputForm[key].value.length; i++){
+			inputForm[key].value[i] = parseInt(inputForm[key].value[i]);
+		}
+		
 		var valueMax = Math.max.apply(Math, inputForm[key].value);
 		var htmlString = "";
 		var htmlString2 = "";

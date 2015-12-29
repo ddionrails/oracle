@@ -41,32 +41,9 @@
 						
 						
 			<script>
-			
-			/** Read CSV Data **/
-			
-		
-			
-
-/**
-var emptyInput = {};
-	function addKeys(inputForm){
-		emptyInput[coefficient] = 1;
-		for(i in keys){
-			var key = inputForm[keys[i]].name;
-			emptyInput[key]= null;
-		};
-	};
-			
-			var myInput = {};
-			var key = "hallo";
-			var key3 = "abc"
-			myInput[key[key3]] = 2;
-			myInput[key3] = 44;
-			//myInput[hallo[id]] = 23;
-			console.log(myInput);
-**/			
 
 		/** 1) Read CSV to define Input Forms **/
+		/** Doesn't work**/
 	
 			var inputForm = {
 				form1: {
@@ -103,9 +80,10 @@ var emptyInput = {};
 					label:["a", "b", "c", "d", "e"],	
 					text: "Das ist eine Multiple Choice Frage.",
 				},**/
-				
-				
-			};
+				}
+			
+			
+			createInputForms(inputForm);
 			
 			/** 2) Read second CSV to define Regression Models **/
 			
@@ -127,61 +105,121 @@ var emptyInput = {};
 				return abc;
 			};
 			
-			d3.csv("inputForm.csv", function(data) {
+			d3.csv("regressionModel.csv", function(data) {
 				dataset = data; 
 				console.log(loadRegressionModel(dataset));
+				
 			});
 			
 			
-			/** 3) Create Input Forms **/
-			createInputForms(inputForm);
+			
 			
 			/** 4) Catch Input by Submit Button **/
 			$("#submit").click(function() {
-				var y = catch_userInput(); // Übergabe klappt nicht
+				var userInput = catch_userInput();
 				
 				/** 5) Compute RegressionModels **/
-				computeRegressionModels(y, abc);
+				computeRegressionModels(userInput, abc);
 				
 				/** 6) Draw Diagrams **/
 				
-			});
-			
-			/**var regressionModel = {
+					/**<!-- Read Input Data -->
 
-				income: {
-					coefficient: 1000,
-					sex: 500,
-					school: 500,
-					//uni: 1500,
-					//size: 5,
-					//age: 20,
-				},
-				lifeSatisfaction: {
-					coefficient: 5,
-					sex: 2,
-					//size: 20,
-					//abc: 30,
-					school: 400,
-				},
+						age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
+						el = [];
+						var income = [];		
+						for(i = 0; i < age.length; i++) {
+							el = 1000+ age[i] * 1000 + school*1000; // will be modified later
+							income.push(el); 
+						}
+									
+					
+						
+						data = [];
+						for(i=0; i < age.length; i++) {
+							el = [age[i], income[i]];
+							data.push(el);
+						}
+						
+						
+						<!-- D3 Visualization -->
+					
+						d3.select("svg").remove();
+						
+						<!-- SVG Element -->
+							var w =500;
+							var h = 500;
+							padding = 60;
+							
+							var svg = d3.select("#chart1")
+								.append("svg")
+								.attr("width", w)
+								.attr("height", h);
+								
+						
+							<!-- Scale -->
+							var xScale = d3.scale.linear()
+											.domain([0, d3.max(data, function(d) {return d[0];})])
+											.range([padding, w-padding]);
+											
+							var yScale = d3.scale.linear()
+											.domain([0, d3.max(data, function(d) {return d[1];})])
+											.range([h-padding, padding]);
+							
+							<!-- Place Data Elements -->
+							var lineFunc = d3.svg.line()
+											.x(function(d) {return xScale(d[0]); })
+											.y(function(d) {return yScale(d[1]); })
+											.interpolate("basis");
+							
+							<!-- Append Data Elements -->				
+							svg.append("svg:path")
+								.attr("d", lineFunc(data))
+								.attr("class", "path");
+														
+							<!-- Axis -->				
+							var xAxis = d3.svg.axis()
+										.scale(xScale)
+										.orient("bottom")
+										.ticks(10);
+										
+													
+							var yAxis = d3.svg.axis()
+										.scale(yScale)
+										.orient("left")
+										.ticks(10)
+										.tickFormat(d3.format("s"));
+							
+										
+							<!-- Place Axis -->			
+							svg.append("g")
+								.call(xAxis)
+								.attr("transform", "translate(0," + (h-padding) +")")
+								.attr("class", "axis");
+								
+							svg.append("g")
+								.attr("class", "axis")
+								.attr("transform", "translate (" + padding + ",0)")
+								.call(yAxis);
+								
+							<!-- Axis Labels -->			
+							var xLabel = svg.append("text")
+											.attr("class", "label")
+											.attr("text-anchor", "middle")
+											.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
+											.text("Einkommen");
+														
+							var yLabel = svg.append("text")
+											.attr("class", "label")
+											.attr("text-anchor", "middle")
+											.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
+											.text("Alter");
+							
+						
+						});	*/
 				
-			}**/
-			
-			/*
-			var input = {
-				coefficient: 1,
-				sex:5,
-				school:1,
-			}
-			*/
-		
-		/**	
-		; 	**/
-		
-		
-		
-			
-			
+			});	
+
 			
 			</script>
 		</body>

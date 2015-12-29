@@ -25,7 +25,7 @@ function catch_userInput(){
 	};
 	
 			
-	/** Read Keys of Object inputForm which defindes Input Forms
+	/** Read Keys of Object inputForm which defines Input Forms
 	/*
 	**/
 	var keys = [];
@@ -37,19 +37,22 @@ function catch_userInput(){
 	/* 	Define empty property by Input form name
 	**/
 		
-	var emptyInput = {};
+	/*
 	function addKeys(inputForm){
-		emptyInput[coefficient] = 1;
+		var emptyInput = {};
+		//emptyInput[coefficient] = 1;
 		for(i in keys){
 			var key = inputForm[keys[i]].name;
 			emptyInput[key]= null;
 		};
+		return emptyInput;
 	};
-	
-	//addKeys(inputForm);		
-		
+	*/
+
 	/** Add catched User Input to empty object **/
 	function organizeUserInput(inputForm) {
+		var emptyInput = {};
+		emptyInput["coefficient"] = 1;
 		for (i in keys) {
 			switch(inputForm[keys[i]].type){
 				
@@ -61,8 +64,11 @@ function catch_userInput(){
 									break;				
 			};
 		};
+		return emptyInput;
 	};
 	
-	organizeUserInput(inputForm);
-	console.log(emptyInput);
+	return organizeUserInput(inputForm);
+
+	
+
 };
