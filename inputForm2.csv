@@ -1,0 +1,30 @@
+key,property,value
+form1,id,sex
+form1,type,radio
+form1,name,hallo
+form1,value,0
+form1,value,1
+form1,label,Männlich
+form1,label,Weiblich
+form1,text,Sind Sie männlich oder weiblich?
+form2,id,size
+form2,type,number
+form2,name,size
+form2,min,0
+form2,max,200
+form2,value,160
+form2,step,1
+form2,label,cm
+form2,text,Wie groß sind Sie?
+form3,id,letter
+form3,name,letter
+form3,value,1
+form3,value,2
+form3,value,3
+form3,value,4
+form3,label,a
+form3,label,b
+form3,label,c
+form3,label,d
+form3,text,Was  sind Ihre Lieblingsbuchstaben?
+form3,type,checkbox
