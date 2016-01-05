@@ -2,36 +2,38 @@
   {
     name:form1,
     id:sex,
-    type:radio,
+    type:binary,
     name:hallo,
     values:{
       0:Männlich,
       1:Weiblich
     },
-    text:"Sind Sie männlich oder weiblich?"
+    text:"Sind Sie männlich oder weiblich?",
+    coefficient: 1000
   },
   {
     name:form2,
     id:size,
-    type:number,
+    type:numeric,
     name:size,
     min:0,
     max:200,
     value:160,
     step:1,
     label:cm,
-    text:"Wie groß sind Sie?"
+    text:"Wie groß sind Sie?",
+    coefficient: 5
   },
   {
     name:form3,
     id:letter,
+    type:multiple,
     name:letter,
-    values:{
-      1:a,
-      2:b,
-      3:c
-    },
-    text:"Was sind Ihre Lieblingsbuchstaben?",
-    type:checkbox
+    values:[
+      { value:1, label:a, coefficient:100},
+      { value:2, label:b, coefficient:20},
+      { value:3, label:c, coefficient:50},
+    ],
+    text:"Was sind Ihre Lieblingsbuchstaben?"
   }
 ]
