@@ -36,4 +36,10 @@
     ],
     text:"Was sind Ihre Lieblingsbuchstaben?"
   }
+  {
+    name:coefficient,
+    id:coef,
+    type:coefficient,
+    value:1000
+  }
 ]
