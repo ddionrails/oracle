@@ -29,6 +29,7 @@
 			<script src="compute_regressionModels.js"></script>
 			<script src="create_InputForms.js"></script>
 			<script src="catch_userInput.js"></script>
+
 			
 		</head>
 
@@ -42,92 +43,66 @@
 						
 			<script>
 
-		/** 1) Read CSV to define Input Forms **/
-		/** Doesn't work**/
-	
-			var inputForm = {
-				form1: {
-					id:"",
-					type:"radio",
-					name:"sex",
-					value:[0,1],
-					label:["Männlich", "Weiblich"],	
-					text: "Sind Sie männlich oder weiblich?",
-					},
-				form2: {
-					id:"size",
-					type:"number",
-					name:"size",
-					min:0,
-					max:200,
-					step:1,
-					value:160,
-					label:["cm"],	
-					text: "Wie groß sind Sie?"
-				},
-				/**
-				form3: {
-					id: "letter",
-					name:"letter",
-					value:[0,1,2,3,4],
-					label:["a", "b", "c", "d", "e"],	
-					text: "Was ist ihr Lieblingsbuchstabe?",
-				},
-				form4: {
-					type:"checkbox",
-					name:"multiple",
-					value:[0,1,2,3,4],
-					label:["a", "b", "c", "d", "e"],	
-					text: "Das ist eine Multiple Choice Frage.",
-				},**/
-				}
-			
-			
-			createInputForms(inputForm);
-			
-			/** 2) Read second CSV to define Regression Models **/
-			
-			var dataset;
-			var abc = {};
-			var j;
+		/** 1) Define Input Forms **/
 
-			function loadRegressionModel(d1){
-				for(var i = 0; i < d1.length; i++){
-					if(!abc.hasOwnProperty(d1[i].key)){
-						abc[d1[i].key] = {};
-						j = i;
-						while(j < d1.length && d1[i].key == d1[j].key){
-							abc[d1[i].key][d1[j].property] = d1[j].value;
-							++j;
-						};
-					};
+			var inputForm = {
+				"form1":{
+					"id":"sex",
+					"type":"binary",
+					"name":"sex",
+					"value":{
+					  0: "Männlich",
+					  1:"Weiblich"
+					},
+					"text":"Sind Sie männlich oder weiblich?",
+					"coefficient": 1000,
+				},
+				"form2":{
+					"bla":"form2",
+					"id":"size",
+					"type":"numeric",
+					"name":"size",
+					"min":0,
+					"max":200,
+					"value":160,
+					"step":1,
+					"label":"cm",
+					"text":"Wie groß sind Sie?",
+					"coefficient": 5,
+				},
+				"form3":{
+					"id":"letter",
+					"type":"multiple",
+					"name":"letter",
+					"value":[
+						{ "value":1, "label":"a", "coefficient":100},
+						{ "value":2, "label":"b", "coefficient":20},
+						{ "value":3, "label":"c", "coefficient":50},
+					],
+					"text":"Was sind Ihre Lieblingsbuchstaben?"
+				 },
 				};
-				return abc;
-			};
-			
-			d3.csv("regressionModel.csv", function(data) {
-				dataset = data; 
-				console.log(loadRegressionModel(dataset));
-				
-			});
-			
-			
-			
-			
+
+			createInputForms(inputForm);
+
 			/** 4) Catch Input by Submit Button **/
 			$("#submit").click(function() {
 				var userInput = catch_userInput();
 				
 				/** 5) Compute RegressionModels **/
-				computeRegressionModels(userInput, abc);
+				//computeRegressionModels(userInput, abc);
 				
 				/** 6) Draw Diagrams **/
 				
-					/**<!-- Read Input Data -->
+					<!-- Read Input Data -->
 
+					/**
 						age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
 						el = [];
-						var income = [];		
+						var income = [];	
+						
+						
+						
 						for(i = 0; i < age.length; i++) {
 							el = 1000+ age[i] * 1000 + school*1000; // will be modified later
 							income.push(el); 
@@ -216,7 +191,7 @@
 											.text("Alter");
 							
 						
-						});	*/
+						});	**/
 				
 			});	
 

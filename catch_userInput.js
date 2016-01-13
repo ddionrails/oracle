@@ -4,9 +4,8 @@ function catch_userInput(){
 			
 	function multipleChoice(){
 		var checkedValue = [];
-		$.each($("input[name="+ inputForm[keys[i]].name+"]:checkbox:checked"), function(){            
-			parseInt(this);
-			checkedValue.push($(this).val());
+		var abc = $.each($("input[name="+ inputForm[keys[i]].name+"]:checkbox:checked"), function(){            
+			checkedValue.push(parseInt($(this).val()));
 		});
 		return checkedValue;
 	};
@@ -31,6 +30,7 @@ function catch_userInput(){
 	var keys = [];
 	for(var key in inputForm){
 		keys.push(key);
+		
 	};	
 
 	/** Generate empty Object
@@ -56,14 +56,16 @@ function catch_userInput(){
 		for (i in keys) {
 			switch(inputForm[keys[i]].type){
 				
-				case "radio": 		emptyInput[inputForm[keys[i]].name] = singleChoice();
+				case "binary":
+				case "single": 		emptyInput[inputForm[keys[i]].name] = singleChoice();
+									break;					
+				case "numeric":		emptyInput[inputForm[keys[i]].name] = getNumber();
 									break;
-				case "number":		emptyInput[inputForm[keys[i]].name] = getNumber();
-									break;
-				case "checkbox":	emptyInput[inputForm[keys[i]].name] = multipleChoice();
+				case "multiple":	emptyInput[inputForm[keys[i]].name] = multipleChoice();
 									break;				
 			};
 		};
+		console.log(emptyInput);
 		return emptyInput;
 	};
 	

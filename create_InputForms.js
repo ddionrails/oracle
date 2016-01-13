@@ -50,19 +50,11 @@ function createInputForms(inputForm){
 	/** Returns the html code for input form type radio (Single Choice) **/
 	function createRadio(key) {
 		
-		for(i = 0; i < inputForm[key].value.length; i++){
-			inputForm[key].value[i] = parseInt(inputForm[key].value[i]);
-		}
-		
-		var valueMax = Math.max.apply(Math, inputForm[key].value);
-		//var valueMax2 = Math.valueMax.apply(Math, inputForm[key].label);
-		var htmlString = "";
+		var htmlString;
 		var htmlString2 = "";
 		
-		for(i = 0; i <= valueMax; i++){
-			//for(j = 0; j < valueMax2; j++)
-			htmlString = "<input type = radio name = " + inputForm[key].name + " value = " + inputForm[key].value[i] + ">"+inputForm[key].label[i]+" <br>"
-			
+		for (subItem in inputForm[key].value) {
+			htmlString = "<input type = radio name = " + inputForm[key].name + " value = " + subItem + ">"+inputForm[key].value[subItem]+" <br>"
 			htmlString2 += htmlString;
 		};
 		return htmlString2;
@@ -71,19 +63,12 @@ function createInputForms(inputForm){
 	/** Returns the html code for input form type checkbox (Multiple Choice) **/		
 	function createCheckbox(key) {
 		
-		for(i = 0; i < inputForm[key].value.length; i++){
-			inputForm[key].value[i] = parseInt(inputForm[key].value[i]);
-		}
-		
-		var valueMax = Math.max.apply(Math, inputForm[key].value);
-		var htmlString = "";
+		var htmlString;
 		var htmlString2 = "";
 		
-		for(i = 0; i <= valueMax; i++){
-		htmlString = "<input type = 'checkbox' name = " + inputForm[key].name + " value = " 
-		+ inputForm[key].value[i] + ">"+inputForm[key].label[i]+" <br>" 
-		
-		htmlString2 += htmlString;
+		for (var i = 0; i < inputForm[key].value.length; i++) {
+			htmlString = "<input type = 'checkbox' name = " + inputForm[key].name + " value = " + inputForm[key].value[i].value + ">"+inputForm[key].value[i].label+" <br>" 
+			htmlString2 += htmlString;
 		}
 		return htmlString2;
 	};	
@@ -95,11 +80,13 @@ function createInputForms(inputForm){
 	function chooseInputType(el){
 	
 		switch(inputForm[keys[i]].type){
-			case "radio": 		return createRadio(keys[i])
+			
+			case "binary": 
+			case "single": 		return createRadio(keys[i])
+								break;			
+			case "numeric":		return createNumber(keys[i])
 								break;
-			case "number":		return createNumber(keys[i])
-								break;
-			case "checkbox":	return createCheckbox(keys[i])
+			case "multiple":	return createCheckbox(keys[i])
 								break;				
 		};
 	}
