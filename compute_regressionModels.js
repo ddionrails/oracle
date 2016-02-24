@@ -7,16 +7,16 @@ function computeRegressionModels(userInput, values){
 
 	for (key in values){
 		var output = 0;
-		for (property in values[key]){
+		for (property in values[key].calc){
 		
 			if(userInput[property].constructor === Array){
 				for(i=0; i < userInput[property].length; i++){
-					output += userInput[property][i] * values[key][property];
+					output += userInput[property][i] * values[key].calc[property];
 				};
 				continue;
 			};
 			
-			output += userInput[property] * values[key][property];	
+			output += userInput[property] * values[key].calc[property];	
 		};
 		output[key] = output;
 		console.log(values[key] + "" + output);
@@ -29,12 +29,7 @@ function computeRegressionModels(userInput, values){
 /**
 for satisfaction
 	for letter
-		output + = userInput[letter] * values[satisfaction][letter];
+		output + = userInput[letter] * values[satisfaction][letter];   
 	for sex
-	for coefficient
-	
-	
-
-			
-			
+	for coefficient				
 **/
