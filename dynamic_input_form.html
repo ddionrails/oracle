@@ -37,7 +37,8 @@
 			<div class=text-right>
 				<button id="submit" type="submit" class="btn btn-lg btn-primary">Submit</button>
 			</div>
-						
+				
+			<div id="chart1"></div>
 						
 			<script>
 
@@ -91,7 +92,11 @@
 						"letter": 1,
 						"coefficient": 1,
 					},
-					"plot":"age",
+					"plot":{
+						"name": "age",
+						"value": 2,
+						"graph": "bubble"
+					},
 				},
 				"income":{
 					"calc":{
@@ -99,7 +104,11 @@
 						"size": 500,
 						"coefficient": 3,
 					},
-					"plot": "age",
+					"plot":{
+						"name": "age",
+						"value": 2,
+						"graph": "line",
+					},
 				}
 			};
 
@@ -109,110 +118,126 @@
 				
 				/** 5) Compute RegressionModels **/
 			
-				computeRegressionModels(userInput, values);
+				var output = computeRegressionModels(userInput, values);
 				
 				/** 6) Draw Diagrams **/
 				
-					<!-- Read Input Data -->
-
-					/**
 						age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
 						el = [];
-						var income = [];	
-						
-						
-						
-						for(i = 0; i < age.length; i++) {
-							el = 1000+ age[i] * 1000 + school*1000; // will be modified later
-							income.push(el); 
-						}
-									
-					
 						
 						data = [];
-						for(i=0; i < age.length; i++) {
-							el = [age[i], income[i]];
-							data.push(el);
-						}
+						for(key in values){
+						
+							for(i=0; i < age.length; i++) {
+								el = [age[i], output[key]*age[i]];
+								data.push(el);
+							};
 						
 						
-						<!-- D3 Visualization -->
-					
-						d3.select("svg").remove();
 						
-						<!-- SVG Element -->
-							var w =500;
-							var h = 500;
-							padding = 60;
+							<!-- D3 Visualization -->
+						
+							//d3.select("svg").remove();
 							
-							var svg = d3.select("#chart1")
-								.append("svg")
-								.attr("width", w)
-								.attr("height", h);
+							<!-- SVG Element -->
+								var w =500;
+								var h = 500;
+								padding = 60;
 								
+								var svg = d3.select("#chart1")
+									.append("svg")
+									.attr("width", w)
+									.attr("height", h);
+									
+							
+								<!-- Scale -->
+								var xScale = d3.scale.linear()
+												.domain([0, d3.max(data, function(d) {return d[0];})])
+												.range([padding, w-padding]);
+												
+								var yScale = d3.scale.linear()
+												.domain([0, d3.max(data, function(d) {return d[1];})])
+												.range([h-padding, padding]);
+								
+							
 						
-							<!-- Scale -->
-							var xScale = d3.scale.linear()
-											.domain([0, d3.max(data, function(d) {return d[0];})])
-											.range([padding, w-padding]);
+								function lineChart(){
+									var lineFunc = d3.svg.line()
+												.x(function(d) {return xScale(d[0]); })
+												.y(function(d) {return yScale(d[1]); })
+												.interpolate("basis");
+														
+									svg.append("svg:path")
+									.attr("d", lineFunc(data))
+									.attr("class", "path");
+								};
+								
+								function bubbleChart(){
+								
+								<!-- Append Data Elements -->
+								var circles = svg.selectAll("circles")
+											.data(data)
+											.enter()
+											.append("circle")
+											.attr("class", "circles");
+
+								circles.attr("cx", function(d){
+											return xScale(d[0])
+										})
+										.attr("cy", function(d){
+											return yScale(d[1])
+										})
+										.attr("r", 1);
+								}
+								
+								<!-- Place Data Elements -->
+								switch(values[key].plot.graph){
+									case "line": lineChart();
+												 break;
+									case "bubble": bubbleChart();
+												 break;
+								}
+								
+								<!-- Axis -->		
+								var xAxis = d3.svg.axis()
+											.scale(xScale)
+											.orient("bottom")
+											.ticks(10);
 											
-							var yScale = d3.scale.linear()
-											.domain([0, d3.max(data, function(d) {return d[1];})])
-											.range([h-padding, padding]);
-							
-							<!-- Place Data Elements -->
-							var lineFunc = d3.svg.line()
-											.x(function(d) {return xScale(d[0]); })
-											.y(function(d) {return yScale(d[1]); })
-											.interpolate("basis");
-							
-							<!-- Append Data Elements -->				
-							svg.append("svg:path")
-								.attr("d", lineFunc(data))
-								.attr("class", "path");
 														
-							<!-- Axis -->				
-							var xAxis = d3.svg.axis()
-										.scale(xScale)
-										.orient("bottom")
-										.ticks(10);
-										
-													
-							var yAxis = d3.svg.axis()
-										.scale(yScale)
-										.orient("left")
-										.ticks(10)
-										.tickFormat(d3.format("s"));
-							
-										
-							<!-- Place Axis -->			
-							svg.append("g")
-								.call(xAxis)
-								.attr("transform", "translate(0," + (h-padding) +")")
-								.attr("class", "axis");
+								var yAxis = d3.svg.axis()
+											.scale(yScale)
+											.orient("left")
+											.ticks(10)
+											.tickFormat(d3.format("s"));
 								
-							svg.append("g")
-								.attr("class", "axis")
-								.attr("transform", "translate (" + padding + ",0)")
-								.call(yAxis);
+											
+								<!-- Place Axis -->			
+								svg.append("g")
+									.call(xAxis)
+									.attr("transform", "translate(0," + (h-padding) +")")
+									.attr("class", "axis");
+									
+								svg.append("g")
+									.attr("class", "axis")
+									.attr("transform", "translate (" + padding + ",0)")
+									.call(yAxis);
+									
+								<!-- Axis Labels -->			
+								var xLabel = svg.append("text")
+												.attr("class", "label")
+												.attr("text-anchor", "middle")
+												.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
+												.text(key);
+															
+								var yLabel = svg.append("text")
+												.attr("class", "label")
+												.attr("text-anchor", "middle")
+												.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
+												.text(values[key].plot.name);
 								
-							<!-- Axis Labels -->			
-							var xLabel = svg.append("text")
-											.attr("class", "label")
-											.attr("text-anchor", "middle")
-											.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
-											.text("Einkommen");
-														
-							var yLabel = svg.append("text")
-											.attr("class", "label")
-											.attr("text-anchor", "middle")
-											.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
-											.text("Alter");
-							
-						
-						});	**/
-				
-			});	
+							};
+					});	
 
 			
 			</script>
