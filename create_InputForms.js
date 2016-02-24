@@ -66,8 +66,8 @@ function createInputForms(inputForm){
 		var htmlString;
 		var htmlString2 = "";
 		
-		for (var i = 0; i < inputForm[key].value.length; i++) {
-			htmlString = "<input type = 'checkbox' name = " + inputForm[key].name + " value = " + inputForm[key].value[i].value + ">"+inputForm[key].value[i].label+" <br>" 
+		for (subItem in inputForm[key].value) {
+			htmlString = "<input type = 'checkbox' name = " + inputForm[key].name + " value = " + subItem + ">"+inputForm[key].value[subItem] +" <br>" 
 			htmlString2 += htmlString;
 		}
 		return htmlString2;

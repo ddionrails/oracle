@@ -4,7 +4,7 @@ function catch_userInput(){
 			
 	function multipleChoice(){
 		var checkedValue = [];
-		var abc = $.each($("input[name="+ inputForm[keys[i]].name+"]:checkbox:checked"), function(){            
+		$.each($("input[name="+ inputForm[keys[i]].name+"]:checkbox:checked"), function(){
 			checkedValue.push(parseInt($(this).val()));
 		});
 		return checkedValue;

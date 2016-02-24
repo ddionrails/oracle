@@ -1,16 +1,40 @@
 
 
-function computeRegressionModels(emptyInput, regressionModel){
+function computeRegressionModels(userInput, values){
 	
-	var outputRegressions = {};
+	var output = {};
+	var abc  = [];
 
-	for (key in regressionModel){
+	for (key in values){
 		var output = 0;
-		for (property in regressionModel[key]){
-			output += emptyInput[property] * regressionModel[key][property];
-		};	
+		for (property in values[key]){
 		
-	outputRegressions[key] = output;
+			if(userInput[property].constructor === Array){
+				for(i=0; i < userInput[property].length; i++){
+					output += userInput[property][i] * values[key][property];
+				};
+				continue;
+			};
+			
+			output += userInput[property] * values[key][property];	
+		};
+		output[key] = output;
+		console.log(values[key] + "" + output);
 	};
-	console.log(outputRegressions);
+	
 };
+	
+
+
+/**
+for satisfaction
+	for letter
+		output + = userInput[letter] * values[satisfaction][letter];
+	for sex
+	for coefficient
+	
+	
+
+			
+			
+**/
