@@ -22,14 +22,19 @@ function createInputForms(inputForm){
 	/* 	Append question text to id
 	/*	Append Form Elements by using the .html-Function and Switch Case 
 	**/
+	
+	
 	function createForm(inputForm) {
 		for (i in keys) {		
+		
+		panelHeader = "<div class= \"panel panel-default\"> <div class=\"panel-heading\"> <h3 class=\"panel-title\">" + inputForm[keys[i]].text + "</h3></div>"
+		panelBody = "<div class=\"panel-body\">" + chooseInputType(keys[i].type) + "</div> </div>"
+	
 			var el = d3.select("#"+keys[i]+"");
-						el.append("h3")
-							.text(inputForm[keys[i]].text);
+						el.html(panelHeader);
 							
 						el.append("form")
-							.html(chooseInputType(keys[i].type));
+							.html(panelBody);
 				}
 			}
 			
