@@ -18,7 +18,7 @@ function computeRegressionModels(userInput, values){
 			tmp += userInput[property] * values[key].calc[property];	
 		};
 		output[key] = tmp;
-		console.log(values[key] + "" + tmp);
+		//console.log(values[key] + "" + tmp);
 	};
 	
 	return output;

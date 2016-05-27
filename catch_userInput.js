@@ -65,7 +65,7 @@ function catch_userInput(){
 									break;				
 			};
 		};
-		console.log(emptyInput);
+		//console.log(emptyInput);
 		return emptyInput;
 	};
 	

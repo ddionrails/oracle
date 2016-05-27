@@ -107,7 +107,7 @@
 					"plot":{
 						"name": "age",
 						"value": 2,
-						"graph": "line",
+						"graph": "bar",
 					},
 				}
 			};
@@ -173,30 +173,46 @@
 								};
 								
 								function bubbleChart(){
-								
-								<!-- Append Data Elements -->
-								var circles = svg.selectAll("circles")
-											.data(data)
-											.enter()
-											.append("circle")
-											.attr("class", "circles");
+									var circles = svg.selectAll("circles")
+												.data(data)
+												.enter()
+												.append("circle")
+												.attr("class", "circles");
 
-								circles.attr("cx", function(d){
-											return xScale(d[0])
-										})
-										.attr("cy", function(d){
-											return yScale(d[1])
-										})
-										.attr("r", 1);
+									circles.attr("cx", function(d){
+												return xScale(d[0])
+											})
+											.attr("cy", function(d){
+												return yScale(d[1])
+											})
+											.attr("r", 1);
+								}
+								
+								function barChart(){
+									barPadding = 1;
+									
+									var rects = svg.selectAll("rect")
+												.data(data)
+												.enter()
+												.append("rect");
+									
+									rects.attr("x", 0) 
+										 .attr("y", function(d) {return yScale(d[0])})
+										 .attr("width", function(d){return xScale(d[1])}) 
+										 .attr("height", ((h -padding) / dataset.length) - barPadding)
+										 .attr("fill", "blue");
+								
 								}
 								
 								<!-- Place Data Elements -->
 								switch(values[key].plot.graph){
-									case "line": lineChart();
-												 break;
-									case "bubble": bubbleChart();
-												 break;
-								}
+									case "line":	lineChart();
+													break;
+									case "bubble":	bubbleChart();
+													break;
+									case "bar": 	barChart();
+													break;
+									default:		console.log("Chart type not defined.")
 								
 								<!-- Axis -->		
 								var xAxis = d3.svg.axis()

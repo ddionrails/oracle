@@ -38,25 +38,55 @@
     "favoriteLetter": [b, c],
 };
 
-// Datenmodell 3: Bewerten der Nutzereingaben mit SOEP-Vergleichswerten
+// Datenmodell 3: Parameter zum Vergleich der Nutzereingaben mit den SOEP-Vergleichswerten
 
 {
     "income":{
-        "calc":{
-            "sex": 9.75,
-            "height": 0.2,
-            "coefficient": 120,
-        },
-        "plot":{
-            "type": "line",
+		"sex": 9.75,
+		"height": 0.2,
+		"coefficient": 120,  
+    },
+	"socialNetworks": {
+		
+	}
+}
+
+// Datenmodell 4: Auswertungsergebnisse
+
+{
+	"income": [1400, 2000, 2200, 2570, 2200],
+	"socialNetworks": [12,123,321,214,100],
+}
+
+
+// Datenmodell 5: Diagrammbeschreibung
+
+{
+	"income":{
+		"plot": "line",
+		"by": {
             "min": 20,
             "max": 100,
-            "by": 20,
-            "label": "age",
+            "steps": 20,
         },
+		"axisLabel":{
+			"x": "Alter",
+			"y": "Einkommen",
+		}
         "text":{
-            "title": "Wer verdient mehr?",
+            "title": "Wie viel wirst du in 10 Jahren? verdienen",
             "subTitle": "Ein Beispieltext passend zum Diagramm."
         },
-    },
+	},
+	"socialNetworks":{
+		"plot": "bars",
+		"axisLabel": {
+			"x" : "",
+			"y" "Nutzung sozialer Netzwerke",
+		}
+		"dataLabels": ["Täglich", "Mindestens 1 mal pro Woche", "Mindestens 1 mal pro Monat", "Seltener", "Nie"],
+		"text":{
+            "title": "Wie oft nutzen wir Facebook und Co?",
+            "subTitle": "Ein Beispieltext passend zum Diagramm."
+        },
 }
