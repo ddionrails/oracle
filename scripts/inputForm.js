@@ -1,106 +1,58 @@
-function renderInputForm(inputForm){
+function renderInputForm(model){
     
-    console.log(inputForm)
-	
-	/** Read Keys of Object inputForm which defindes Input Forms
-	/*
-	**/
-	var keys = [];
-		for(var key in inputForm){
-			keys.push(key);
-		}	
+    for(i in model){
+         
+        switch(model[i].type){
+          
+            case "binary":      append(single(i))
+                                break;
+            case "single":      append(single(i))
+                                break;                            
+            case "numeric":     append(numeric(i))
+                                break;	
+            case "multiple":    append(multiple(i))
+                                break;                
+            default:            console.log("Error. Type" + model[i].type + "not defined.")
+        }
+    }
+    
+    /** Returns the html code for type binary/single **/
+	function single(i){
+        tmp = "";
 		
-	/** Append new divs with id of later generated graphics to body
-	/*  Starting point: #inputFormHere
-	/* 	Key-name == id
-	**/	
-	for(i in keys){
-		var body = d3.select("#inputFormHere");
-			body.append("div")
-				.attr("id", keys[i]);
-	};
-	
-	/** Select each key (=> id)
-	/* 	Append question text to id
-	/*	Append Form Elements by using the .html-Function and Switch Case 
-	**/
-	
-	
-	function createForm(inputForm) {
-		for (i in keys) {		
-		
-		panelHeader = "<div class= \"panel panel-default\"> <div class=\"panel-heading\"> <h3 class=\"panel-title\">" + inputForm[keys[i]].text + "</h3></div>"
-		panelBody = "<div class=\"panel-body\">" + chooseInputType(keys[i].type) + "</div> </div>"
-	
-			var el = d3.select("#"+keys[i]+"");
-						el.html(panelHeader);
-							
-						el.append("form")
-							.html(panelBody);
-				}
-			}
-			
-	
-	/** Returns the html code for input form type number **/
-	function createNumber(key) {
-		
-		inputForm[key].max = parseInt(inputForm[key].max);
-		inputForm[key].min = parseInt(inputForm[key].min);
-		inputForm[key].step = parseInt(inputForm[key].step);
-		inputForm[key].value = parseInt(inputForm[key].value);
-			
-		return "<input type= number id = "+ inputForm[key].id + " name = " + inputForm[key].name + " min = " +inputForm[key].min + " max = " 
-				+ inputForm[key].max + " step = " + inputForm[key].step + " value = "  
-				+ inputForm[key].value + ">" + inputForm[key].label
-	};
-
-	/** Returns the html code for input form type radio (Single Choice) **/
-	function createRadio(key) {
-		
-		var htmlString;
-		var htmlString2 = "";
-		
-		for (subItem in inputForm[key].value) {
-			htmlString = "<input type = radio name = " + inputForm[key].name + " value = " + subItem + ">"+inputForm[key].value[subItem]+" <br>"
-			htmlString2 += htmlString;
+		for (j in model[i].values) {
+			tmp += "<input type = radio id = " + i + " value = " +  model[i].values[j] + ">" + j +" <br>"
 		};
-		return htmlString2;
+		return tmp;
 	};
-	
-	/** Returns the html code for input form type checkbox (Multiple Choice) **/		
-	function createCheckbox(key) {
+    
+    /** Returns the html code for type numeric **/
+	function numeric(i) {
+			
+		return "<input type= number id = " + i + " min = " + parseInt(model[i].min) + " max = " 
+				+ parseInt(model[i].max) + " value = " + parseInt(model[i].start) + ">" + model[i].label
+	};
+    
+    /** Returns the html code for type multiple **/		
+	function multiple(i) {
 		
-		var htmlString;
-		var htmlString2 = "";
+		tmp = "";
 		
-		for (subItem in inputForm[key].value) {
-			htmlString = "<input type = 'checkbox' name = " + inputForm[key].name + " value = " + subItem + ">"+inputForm[key].value[subItem] +" <br>" 
-			htmlString2 += htmlString;
-		}
-		return htmlString2;
+		for (j in model[i].values) {
+			tmp += "<input type = checkbox id = " + i + " value = " + model[i].values[j] + ">" + j +" <br>" 
+		};
+		return tmp;
 	};	
-	
-	/** Get the function for specified input type
-	/*  Calls createInputType
-	/*	Return String with html code for input form
-	**/
-	function chooseInputType(el){
-	
-		switch(inputForm[keys[i]].type){
-			
-			case "binary": 
-			case "single": 		return createRadio(keys[i])
-								break;			
-			case "numeric":		return createNumber(keys[i])
-								break;
-			case "multiple":	return createCheckbox(keys[i])
-								break;				
-		};
-	}
-	
-	createForm(inputForm);
+    
+
+    /* Appends element to DOM */
+    function append(string) {
+        
+        d3.select("#survey")
+            .append("text").text(model[i].text)
+            .append("form").html(string);
+    }
 }
-	
 
 
 			

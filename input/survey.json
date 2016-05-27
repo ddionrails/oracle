@@ -13,6 +13,8 @@
         "text": "In welchem Jahr sind Sie geboren?",
         "min": 1900,
         "max": 2010,
+        "start": 1995,
+        "label": "",
         "coefficient": 1
     },
     "edu": {
@@ -29,7 +31,7 @@
     "pets": {
         "type": "multiple",
         "text":"Welche der folgenden Haustiere leben in Ihrem Haushalt?",
-        "value":{
+        "values":{
             "Fische" : 0,
             "Hund" : 1,
             "Katze" : 2,
