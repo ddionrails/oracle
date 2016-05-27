@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+	<html lang="de">
+		<head>
+			<title>SOEP ORACLE</title>
+			<meta charset="utf-8">
+			
+			
+			<!-- jQuery -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		
+			<!-- Bootstrap -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+			
+			<!-- CSS -->
+			<link rel="stylesheet" href="css/style.css" />
+			
+			<!-- Google Fonts -->
+			<link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+			
+			<!-- D3.js -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+			<script src="http://d3js.org/d3.v3.min.js"></script>
+			
+			<!-- Javascripts -->
+			<script src="compute_regressionModels.js"></script>
+			<script src="create_InputForms.js"></script>
+			<script src="catch_userInput.js"></script>
+
+			
+		</head>
+
+		<body>
+
+			<div id="inputFormHere"></div>
+			<div class=text-right>
+				<button id="submit" type="submit" class="btn btn-lg btn-primary">Submit</button>
+			</div>
+				
+			<div id="chart1"></div>
+						
+			<script>
+
+		/** 1) Define Input Forms **/
+
+			var inputForm = {
+				"form1":{
+					"id":"sex",
+					"type":"binary",
+					"name":"sex",
+					"value":{
+					  0: "Männlich",
+					  1:"Weiblich"
+					},
+					"text":"Sind Sie männlich oder weiblich?",
+					"coefficient": 1,
+				},
+				"form2":{
+					"bla":"form2",
+					"id":"size",
+					"type":"numeric",
+					"name":"size",
+					"min":0,
+					"max":200,
+					"value":160,
+					"step":1,
+					"label":"cm",
+					"text":"Wie groß sind Sie?",
+					"coefficient": 1,
+				},
+				"form3":{
+					"id":"letter",
+					"type":"multiple",
+					"name":"letter",
+					"value":{
+						1: "a",
+						2: "b",
+						3: "c",
+					},
+					"text":"Was sind Ihre Lieblingsbuchstaben?",
+				 },
+				};
+
+			createInputForms(inputForm);
+			
+			var values = {
+				"satisfaction":{
+					"calc":{
+						"sex": 1,
+						"size": 1,
+						"letter": 1,
+						"coefficient": 1,
+					},
+					"plot":{
+						"name": "age",
+						"value": 2,
+						"graph": "bubble"
+					},
+				},
+				"income":{
+					"calc":{
+						"sex": 10,
+						"size": 500,
+						"coefficient": 3,
+					},
+					"plot":{
+						"name": "age",
+						"value": 2,
+						"graph": "bar",
+					},
+				}
+			};
+
+			/** 4) Catch Input by Submit Button **/
+			$("#submit").click(function() {
+				var userInput = catch_userInput();
+				
+				/** 5) Compute RegressionModels **/
+			
+				var output = computeRegressionModels(userInput, values);
+				
+				/** 6) Draw Diagrams **/
+				
+						age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
+						el = [];
+						
+						data = [];
+						for(key in values){
+						
+							for(i=0; i < age.length; i++) {
+								el = [age[i], output[key]*age[i]];
+								data.push(el);
+							};
+						
+						
+						
+							<!-- D3 Visualization -->
+						
+							//d3.select("svg").remove();
+							
+							<!-- SVG Element -->
+								var w =500;
+								var h = 500;
+								padding = 60;
+								
+								var svg = d3.select("#chart1")
+									.append("svg")
+									.attr("width", w)
+									.attr("height", h);
+									
+							
+								<!-- Scale -->
+								var xScale = d3.scale.linear()
+												.domain([0, d3.max(data, function(d) {return d[0];})])
+												.range([padding, w-padding]);
+												
+								var yScale = d3.scale.linear()
+												.domain([0, d3.max(data, function(d) {return d[1];})])
+												.range([h-padding, padding]);
+								
+							
+						
+								function lineChart(){
+									var lineFunc = d3.svg.line()
+												.x(function(d) {return xScale(d[0]); })
+												.y(function(d) {return yScale(d[1]); })
+												.interpolate("basis");
+														
+									svg.append("svg:path")
+									.attr("d", lineFunc(data))
+									.attr("class", "path");
+								};
+								
+								function bubbleChart(){
+									var circles = svg.selectAll("circles")
+												.data(data)
+												.enter()
+												.append("circle")
+												.attr("class", "circles");
+
+									circles.attr("cx", function(d){
+												return xScale(d[0])
+											})
+											.attr("cy", function(d){
+												return yScale(d[1])
+											})
+											.attr("r", 1);
+								}
+								
+								function barChart(){
+									barPadding = 1;
+									
+									var rects = svg.selectAll("rect")
+												.data(data)
+												.enter()
+												.append("rect");
+									
+									rects.attr("x", 0) 
+										 .attr("y", function(d) {return yScale(d[0])})
+										 .attr("width", function(d){return xScale(d[1])}) 
+										 .attr("height", ((h -padding) / dataset.length) - barPadding)
+										 .attr("fill", "blue");
+								
+								}
+								
+								<!-- Place Data Elements -->
+								switch(values[key].plot.graph){
+									case "line":	lineChart();
+													break;
+									case "bubble":	bubbleChart();
+													break;
+									case "bar": 	barChart();
+													break;
+									default:		console.log("Chart type not defined.")
+								
+								<!-- Axis -->		
+								var xAxis = d3.svg.axis()
+											.scale(xScale)
+											.orient("bottom")
+											.ticks(10);
+											
+														
+								var yAxis = d3.svg.axis()
+											.scale(yScale)
+											.orient("left")
+											.ticks(10)
+											.tickFormat(d3.format("s"));
+								
+											
+								<!-- Place Axis -->			
+								svg.append("g")
+									.call(xAxis)
+									.attr("transform", "translate(0," + (h-padding) +")")
+									.attr("class", "axis");
+									
+								svg.append("g")
+									.attr("class", "axis")
+									.attr("transform", "translate (" + padding + ",0)")
+									.call(yAxis);
+									
+								<!-- Axis Labels -->			
+								var xLabel = svg.append("text")
+												.attr("class", "label")
+												.attr("text-anchor", "middle")
+												.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
+												.text(key);
+															
+								var yLabel = svg.append("text")
+												.attr("class", "label")
+												.attr("text-anchor", "middle")
+												.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
+												.text(values[key].plot.name);
+								
+							};
+					});	
+
+			
+			</script>
+		</body>
+	</html>
+		
+		
