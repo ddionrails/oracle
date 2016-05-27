@@ -1,0 +1,64 @@
+Testcases for SOEP ORACLE
+
+-- Survey --
+
+Bitte gebe dein Geschlecht an [sex]
+   -> Binary
+   [] Männlich
+   [] Weiblich
+   
+In welchem Jahr bist du geboren? [yearOfBirth]
+   -> Number Field
+
+Welchen Schulabschluss hast du erworben? [edu]
+   -> Single Choice
+   [] Hauptschulabschluss
+   [] Realschulabschluss
+   [] Abitur
+   [] Kein Abschluss
+   
+Wie viel verdienst du (Angabe in Brutto)? [grossIncome]
+
+Wie zufrieden bist du gegenwärtig mit deinem Leben? [satisfaction]
+   -> Single Choice (Scala)
+   [0]
+   ...
+   ...
+   ...
+   [10]
+   
+Geben Sie bitte zu jeder Tätigkeit an, wie oft du das machst: [leisure]
+
+- Täglich, Mindestens 1 mal pro Woche, Mindestens 1 mal pro Monat, Seltener, Nie
+
+[] Essen oder Trinken gehen
+[] Aktive sportliche Bewegung
+[] Nutzen sozialer Online-Netzwerke
+  
+-- Evaluation --
+
+A)	Income growth
+
+Needed variables: sex, edu, yearOfBirth, grossIncome
+Show: personal income growth
+Plot: visualize personal income growth by age (in steps of 10 years), start at todays gross income
+
+B) Satisfaction
+
+Needed variables: yearOfBirth, satisfaction
+Show: personal happiness curve
+Plot: visualize personal happiness curve by age (in steps of 10 years), start at current age
+
+C) Use of social networks
+
+Needed variables: leisure
+Show: Compare user's level of social networks activity with peer group
+Plot: simple bar chart, highlight users category
+
+
+
+
+
+
+   
+	

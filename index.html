@@ -6,11 +6,22 @@
 			
 			<!-- D3.js -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<<<<<<< HEAD
 			<script src="http://d3js.org/d3.v3.min.js"></script>	
             
             <script src= "./input/survey.json"></script>
             <script src= "./scripts/inputForm.js"></script>
         
+=======
+			<script src="http://d3js.org/d3.v3.min.js"></script>
+			
+			<!-- Javascripts -->
+			<script src="scripts/js/compute_regressionModels.js"></script>
+			<script src="scripts/js/create_InputForms.js"></script>
+			<script src="scripts/js/catch_userInput.js"></script>
+
+	
+>>>>>>> 90b5e79... Update dataModelsExamples and add first testcases
 		</head>
 
 		<body>
@@ -28,5 +39,293 @@
 
 			</script>
   
+<<<<<<< HEAD
+=======
+			<!-- User Input -->
+			<div class="row">
+				<div class="container">
+					<div class="col-md-12">
+						<div class="h1"><h1>Frage das SOEP ORACLE nach deiner Zukunft.<h1></div>
+						<div class="h4"><h4>Beantworte zunächst einige Fragen zu dir: </h4></div>
+				
+						<div id="inputFormHere"></div>
+						
+						<div class=text-right>
+							<button id="submit" type="submit" class="btn btn-lg btn-primary">Absenden</button>
+						</div>
+						<hr half-rule>
+					</div>					
+				</div>
+			</div>
+		
+		
+			
+		
+						
+			<!-- Prediction -->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="load_new_header"></div>
+						<div id="chart1"></div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Footer -->
+			<footer class="container footer">
+				<p> SOEP ORACLE </p>
+			</footer>
+						
+			<script>
+						
+
+
+		/** 1) Define Input Forms **/
+
+			var inputForm = {
+				"form1":{
+					"id":"sex",
+					"type":"binary",
+					"name":"sex",
+					"value":{
+					  0: "Männlich",
+					  1:"Weiblich"
+					},
+					"text":"Sind Sie männlich oder weiblich?",
+					"coefficient": 1,
+				},
+				"form2":{
+					"bla":"form2",
+					"id":"size",
+					"type":"numeric",
+					"name":"size",
+					"min":0,
+					"max":200,
+					"value":160,
+					"step":1,
+					"label":"cm",
+					"text":"Wie groß sind Sie?",
+					"coefficient": 1,
+				},
+				"form3":{
+					"id":"letter",
+					"type":"multiple",
+					"name":"letter",
+					"value":{
+						1: "a",
+						2: "b",
+						3: "c",
+					},
+					"text":"Was sind Ihre Lieblingsbuchstaben?",
+				 },
+				};
+
+			createInputForms(inputForm);
+			
+			var values = {
+				"satisfaction":{
+					"calc":{
+						"sex": 1,
+						"size": 1,
+						"letter": 1,
+						"coefficient": 1,
+					},
+					"plot":{
+						"name": "age",
+						"value": 2,
+						"graph": "bar"
+					},
+				},
+				"income":{
+					"calc":{
+						"sex": 10,
+						"size": 500,
+						"coefficient": 3,
+					},
+					"plot":{
+						"name": "age",
+						"value": 2,
+						"graph": "line",
+					},
+				}
+			};
+
+			/** 4) Catch Input by Submit Button **/
+			$("#submit").click(function() {
+				d3.selectAll("svg").remove();
+				
+				var userInput = catch_userInput();
+				
+				/** 5) Compute RegressionModels **/
+			
+				var output = computeRegressionModels(userInput, values);
+				
+				/** 6) Draw Diagrams **/
+				
+						age = d3.range(1,100+1); // creates Array age=[0, ..., 100]								
+						el = [];
+						
+						
+						// Gruppierte Daten
+						
+						var data = [
+										["Durchschnitt", 174], ["Du", userInput.size]
+									];
+						
+						console.log(data);
+						
+						/** Für Linien
+						data = [];
+						for(key in values){
+						
+							for(i=0; i < age.length; i++) {
+								el = [age[i], output[key]*age[i]];
+								data.push(el);
+							};
+						**/
+						
+						
+							<!-- D3 Visualization -->
+							
+							<!-- SVG Element -->
+								var w =500;
+								var h = 500;
+								padding = 60;
+								
+								var svg = d3.select("#chart1")
+									.append("svg")
+									.attr("width", w)
+									.attr("height", h);
+									
+							
+								<!-- Scale -->
+								
+								var xScale = d3.scale.linear()
+													.domain([0, d3.max(data, function(d) {return d[1]})])
+													.range([padding, w-padding]);
+						
+								// Y-Skala
+								var yScale = d3.scale.ordinal()
+									.domain(["Durchschnitt", "Du"])
+									.rangeRoundBands([h - padding, 0]);
+								
+								/**
+								var xScale = d3.scale.linear()
+												.domain([0, d3.max(data, function(d) {return d[0];})])
+												.range([padding, w-padding]);
+												
+								var yScale = d3.scale.linear()
+												.domain([0, d3.max(data, function(d) {return d[1];})])
+												.range([h-padding, padding]);
+								**/
+							
+						
+								function lineChart(){
+									var lineFunc = d3.svg.line()
+												.x(function(d) {return xScale(d[0]); })
+												.y(function(d) {return yScale(d[1]); })
+												.interpolate("basis");
+														
+									svg.append("svg:path")
+									.attr("d", lineFunc(data))
+									.attr("class", "path");
+								};
+								
+								function bubbleChart(){
+								
+								var circles = svg.selectAll("circles")
+											.data(data)
+											.enter()
+											.append("circle")
+											.attr("class", "circles");
+
+								circles.attr("cx", function(d){
+											return xScale(d[0])
+										})
+										.attr("cy", function(d){
+											return yScale(d[1])
+										})
+										.attr("r", 1);
+								}
+								
+								function barChart(){
+									barPadding = 1;
+									
+									var rects = svg.selectAll("rect")
+												.data(data)
+												.enter()
+												.append("rect");
+									
+									rects.attr("x", 0) 
+										 .attr("y", function(d) {return yScale(d[0])})
+										 .attr("width", function(d){return xScale(d[1])}) 
+										 .attr("height", ((h -padding) / data.length) - barPadding)
+										 .attr("fill", "blue");
+								
+								}
+								
+								<!-- Place Data Elements -->
+								switch(values[key].plot.graph){
+									case "line":	lineChart();
+													break;
+									case "bubble":	bubbleChart();
+													break;
+									case "bar": 	barChart();
+													break;
+									default:		console.log("Chart type not defined!");
+								}
+								
+								<!-- Axis -->		
+								var xAxis = d3.svg.axis()
+											.scale(xScale)
+											.orient("bottom")
+											.ticks(10);
+											
+														
+								var yAxis = d3.svg.axis()
+											.scale(yScale)
+											.orient("left")
+											.ticks(10)
+											.tickFormat(d3.format("s"));
+								
+											
+								<!-- Place Axis -->			
+								svg.append("g")
+									.call(xAxis)
+									.attr("transform", "translate(0," + (h-padding) +")")
+									.attr("class", "axis");
+									
+								svg.append("g")
+									.attr("class", "axis")
+									.attr("transform", "translate (" + padding + ",0)")
+									.call(yAxis);
+									
+								<!-- Axis Labels -->			
+								var xLabel = svg.append("text")
+												.attr("class", "label")
+												.attr("text-anchor", "middle")
+												.attr("transform", "translate("+ (padding/3) +","+(h/2)+")rotate(-90)")
+												.text(key);
+															
+								var yLabel = svg.append("text")
+												.attr("class", "label")
+												.attr("text-anchor", "middle")
+												.attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")
+												.text(values[key].plot.name);
+								
+							});
+					//});	
+ 
+					</script>
+
+				
+					</div>
+				</div>
+			</div>	
+			
+		
+ 
+>>>>>>> 90b5e79... Update dataModelsExamples and add first testcases
 		</body>
 	</html> 
