@@ -1,0 +1,41 @@
+{
+    "sex": {
+        "type":"binary",
+        "text": "Sind Sie männlich oder weiblich?",
+        "values":{
+          "Männlich" : 0,
+          "Weiblich" : 1
+        },
+        "coefficient": 1
+    },
+    "birthYear": {
+        "type": "numeric",
+        "text": "In welchem Jahr sind Sie geboren?",
+        "min": 1900,
+        "max": 2010,
+        "coefficient": 1
+    },
+    "edu": {
+        "type": "single",
+        "text": "Welchen Schulabschluss haben Sie erworben?",
+        "values": {
+            "Hauptschulabschluss" : 0,
+            "Realschulabschluss" : 1,
+            "Hochschulreife" : 2,
+            "kein Abschluss" : 3
+        },
+        "coefficient": 1
+    },
+    "pets": {
+        "type": "multiple",
+        "text":"Welche der folgenden Haustiere leben in Ihrem Haushalt?",
+        "value":{
+            "Fische" : 0,
+            "Hund" : 1,
+            "Katze" : 2,
+            "Maus" : 3,
+            "Reptil" : 4
+        },
+       "coefficient": 1
+    }
+}

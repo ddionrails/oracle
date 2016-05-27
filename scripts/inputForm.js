@@ -1,4 +1,6 @@
-function createInputForms(inputForm){
+function renderInputForm(inputForm){
+    
+    console.log(inputForm)
 	
 	/** Read Keys of Object inputForm which defindes Input Forms
 	/*

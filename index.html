@@ -7,10 +7,21 @@
 			<!-- D3.js -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 			<script src="http://d3js.org/d3.v3.min.js"></script>	
+            
+            <script src= "./input/survey.json"></script>
+            <script src= "./scripts/inputForm.js"></script>
+        
 		</head>
 
 		<body>
             <script>
+            
+            path = "./input/survey.json";
+            
+            d3.json(path, function(json) {
+				 renderInputForm(json);
+			
+			});
 
 			</script>
   
