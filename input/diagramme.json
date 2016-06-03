@@ -1,0 +1,30 @@
+{
+    "income":{
+		"type": "line",
+		"by": {
+            "min": 20,
+            "max": 100,
+            "steps": 20
+        },
+		"axisLabel":{
+			"x": "Alter",
+			"y": "Einkommen"
+		},
+        "text":{
+            "title": "Wie viel wirst du in 10 Jahren verdienen?",
+            "subTitle": "Ein Beispieltext passend zum Diagramm."
+        }
+	},
+	"socialNetworks":{
+		"type": "bar",
+		"axisLabel": {
+			"x" : "",
+			"y" : "Nutzung sozialer Netzwerke"
+		},
+		"dataLabels": ["Täglich", "Mindestens 1 mal pro Woche", "Mindestens 1 mal pro Monat", "Seltener", "Nie"],
+		"text":{
+            "title": "Wie oft nutzen wir Facebook und Co?",
+            "subTitle": "Ein Beispieltext passend zum Diagramm."
+        }
+    }
+}

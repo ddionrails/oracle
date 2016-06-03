@@ -39,5 +39,17 @@
             "Reptil" : 4
         },
        "coefficient": 1
+    },
+     "socialNetworks": {
+        "type": "single",
+        "text": "Wie oft nutzen Sie soziale Netzwerke?",
+        "values": {
+            "Täglich" : 0,
+            "Mind. 1 mal pro Woche" : 1,
+            "Mind. 1 mal im Monat" : 2,
+            "Seltener" : 3,
+            "Nie" : 4
+        },
+        "coefficient": 1
     }
 }

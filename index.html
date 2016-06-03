@@ -1,44 +1,63 @@
 <!DOCTYPE HTML>
-	<html lang="de">
+	<html lang='de'>
 		<head>
 			<title>SOEP ORACLE</title>
-			<meta charset="utf-8">
+			<meta charset='utf-8'>
 			
 			<!-- jQuery -->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+			<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+			<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
 			
 			<!-- Bootstrap -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+			<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>
 
 			<!-- D3.js -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-			<script src="http://d3js.org/d3.v3.min.js"></script>	
+			<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' charset='utf-8'></script>
+			<script src='http://d3js.org/d3.v3.min.js'></script>	
             
-            <script src= "./input/survey.json"></script>
-            <script src= "./scripts/inputForm.js"></script>
-			<script src= "./scripts/catchUserInput.js"></script>
-		
+            <script src= './input/survey.json'></script>
+            <script src= './input/diagramme.json'></script>
+            <script src= './scripts/inputForm.js'></script>
+			<script src= './scripts/catchUserInput.js'></script>
+            <script src= './scripts/plot/plot.js'></script>
+            <script src= './scripts/plot/bar.js'></script>
 			
 		</head>
 
 		<body>
         
             <div id='survey'></div>
-			<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+			<button id='submit' type='submit' class='btn btn-primary'>Submit</button>
+            <div id='chart'></div>
 
             <script>
             
-            path = "./input/survey.json";
+            path_s = './input/survey.json';
+            path_p = './input/diagramme.json'
             
-            d3.json(path, function(json) {
-				renderInputForm(json);
-		
-				d3.select("#submit").on("click", function() {
-					
-					catchUserInput(json); 
-					
-				});
+            d3.json(path_s, function(survey) {
+                d3.json(path_p, function(howToPlot) {
+                    renderInputForm(survey);
+            
+                    d3.select('#submit').on('click', function() {
+                        
+                       userInput = catchUserInput(survey);
+                        // aggregated = aggregate(userInput);
+                        
+                        // Testdata
+                        aggregated = {}; tmp = [];
+                        for(i = 0; i < 5; i++) {    
+                           tmp.push(Math.random() * 100);        
+                        };
+                        aggregated['socialNetworks'] = tmp;   
+          
+                        for(i in aggregated){
+                            current = i;
+                            plot(aggregated[i], howToPlot[i]);
+                        }
+                        
+                    });
+                });
 			});
  
 			</script>
