@@ -21,7 +21,7 @@ function renderInputForm(model){
         tmp = "";
 		
 		for (j in model[i].values) {
-			tmp += "<input type = radio id = " + i + " value = " +  model[i].values[j] + ">" + j +" <br>"
+			tmp += "<input type = radio id = " + i + " name = " + i + " value = " +  model[i].values[j] + ">" + j +" <br>"
 		};
 		return tmp;
 	};
