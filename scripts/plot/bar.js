@@ -1,5 +1,10 @@
 function barChart(){
    
+    data = [];
+    for(i = 0; i < rData.length; i++){
+        tmp = [rData[i], howToPlot.dataLabels[i]]; 
+        data.push(tmp);
+    }
    
      // Append rect elements and map with data
     rects = svg.selectAll('rect')

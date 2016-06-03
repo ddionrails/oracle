@@ -1,17 +1,12 @@
-function plot(rData, description){
+function plot(d, description){
     
     howToPlot = description;
-    
-    data = [];
-    for(i = 0; i < rData.length; i++){
-        tmp = [rData[i], howToPlot.dataLabels[i]]; 
-        data.push(tmp);
-    }
+    rData = d;
     
     // Set margin, width, height and padding for chart
     margin = {top: 20, right: 20, bottom: 20, left: 120};
     w = 600 - margin.left - margin.right;
-    h = (100 + 20 * data.length) - margin.top - margin.bottom;
+    h = (100 + 20 * rData.length) - margin.top - margin.bottom;
     barPadding = 1;
     
     // Create SVG ELement and append to #chart
@@ -22,10 +17,6 @@ function plot(rData, description){
                 .attr('class', 'chart')
                 .append('g')
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");	
-            
-    // Color Scale
-    colors = d3.scale.category20();
-    colors.domain(howToPlot.dataLabels)
     
     usersCategory = function(d){
         if(d[1] == howToPlot.dataLabels[userInput[current]]){
@@ -37,9 +28,11 @@ function plot(rData, description){
     
     switch(howToPlot.type) {
         
-        case('bar'): barChart()
-                     break;
-        default:     console.log("Error.")
+        case('bar'):    barChart()
+                        break;
+        case('line'):   lineChart()
+                        break;             
+        default:        console.log("Error.")
     }
     
     

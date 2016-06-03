@@ -21,6 +21,7 @@
 			<script src= './scripts/catchUserInput.js'></script>
             <script src= './scripts/plot/plot.js'></script>
             <script src= './scripts/plot/bar.js'></script>
+            <script src= './scripts/plot/line.js'></script>
 			
 		</head>
 
@@ -49,7 +50,10 @@
                         for(i = 0; i < 5; i++) {    
                            tmp.push(Math.random() * 100);        
                         };
-                        aggregated['socialNetworks'] = tmp;   
+                        aggregated['socialNetworks'] = tmp;  
+                        
+                        aggregated['income'] = [1400, 2000, 2100, 2100, 2000];  
+                        
           
                         for(i in aggregated){
                             current = i;
