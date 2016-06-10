@@ -1,0 +1,16 @@
+{
+    "income": {
+        "range": [20, 100, 20],
+        "calculate": true,
+        "coef": {
+            "null": 1500,
+            "sex": 1000,
+            "byRange": 100
+        }  
+    },
+    "socialNetworks": {
+        "calculate": false,
+        "data": [1400, 1800, 500, 1400, 2000]
+    }
+}
+

@@ -1,11 +1,6 @@
 {
     "income":{
 		"type": "line",
-		"by": {
-            "min": 20,
-            "max": 100,
-            "steps": 20
-        },
 		"axisLabel":{
 			"x": "Alter",
 			"y": "Einkommen"

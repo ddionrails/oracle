@@ -1,7 +1,9 @@
-function plot(d, description){
+function plot(data, howToPlot){
     
-    howToPlot = description;
-    rData = d;
+    rData = data;
+    
+    console.log("Data: " + aggregated.income)
+    
     
     // Set margin, width, height and padding for chart
     margin = {top: 20, right: 20, bottom: 20, left: 120};
@@ -18,21 +20,15 @@ function plot(d, description){
                 .append('g')
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");	
     
-    usersCategory = function(d){
-        if(d[1] == howToPlot.dataLabels[userInput[current]]){
-            return 'red';            
-        } else {
-            return 'steelblue';
-        }    
-    }
+    
     
     switch(howToPlot.type) {
         
-        case('bar'):    barChart()
-                        break;
-        case('line'):   lineChart()
-                        break;             
-        default:        console.log("Error.")
+        case('bar'):            barChart()
+                                break;                       
+        case('line'):           lineChart()
+                                break;            
+        default:                console.log('Error.')
     }
     
     

@@ -1,5 +1,6 @@
 function catchUserInput(model){
 	userInput = {};
+    userInput["null"] = 1;
 	
 	for(i in model){
 		
@@ -30,8 +31,12 @@ function catchUserInput(model){
 	/** Catch user input for the type numeric **/
 	function numeric(i){
 		try {
-			return parseInt(d3.select('#' + i).property("value"));
-
+            if(i == "age"){
+                bYear = parseInt(d3.select('#' + i).property("value"));
+                return (new Date().getFullYear()- bYear);
+            } else {
+                return parseInt(d3.select('#' + i).property("value"));
+            }    
 		} catch(e) { 
 			// Not sure how to handle yet
 		}

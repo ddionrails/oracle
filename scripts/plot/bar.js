@@ -2,8 +2,16 @@ function barChart(){
    
     data = [];
     for(i = 0; i < rData.length; i++){
-        tmp = [rData[i], howToPlot.dataLabels[i]]; 
-        data.push(tmp);
+        composite = [rData[i], howToPlot.dataLabels[i]]; 
+        data.push(composite);
+    }
+    
+    highlight = function(d){
+        if(d[1] == howToPlot.dataLabels[userInput[current]]){
+            return 'red';            
+        } else {
+            return 'steelblue';
+        }    
     }
    
      // Append rect elements and map with data
@@ -11,14 +19,8 @@ function barChart(){
             .data(data)
             .enter()
             .append('rect')
-            .style('fill', function(d){ return usersCategory(d)} )
+            .style('fill', function(d){ return highlight(d)} )
             .attr('class', 'rects');
-   
-    text = svg.selectAll('text')
-            .data(data)
-            .enter()
-            .append('text')
-            .attr('class', 'text');
     
     // X-Scale
     var xScale = d3.scale.linear()
@@ -61,7 +63,12 @@ function barChart(){
     
     //Append Labels
     barHeight = (h / data.length) - barPadding; 
-    text.attr('x', function(d) {return xScale(d[0]) + 3})
+    labels = svg.selectAll('text')
+        .data(data)
+        .enter()
+        .append('text')
+        .attr('class', 'text')
+        .attr('x', function(d) {return xScale(d[0]) + 3})
         .attr('y', function(d) {return yScale(d[1]) + (barHeight/2) + 2})
         .text(function(d) {return (d3.round(d[0], 1))});	
            

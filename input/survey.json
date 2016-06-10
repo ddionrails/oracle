@@ -8,7 +8,7 @@
         },
         "coefficient": 1
     },
-    "birthYear": {
+    "age": {
         "type": "numeric",
         "text": "In welchem Jahr sind Sie geboren?",
         "min": 1900,

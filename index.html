@@ -17,8 +17,10 @@
             
             <script src= './input/survey.json'></script>
             <script src= './input/diagramme.json'></script>
+            <script src= './input/calculation.json'></script>
             <script src= './scripts/inputForm.js'></script>
 			<script src= './scripts/catchUserInput.js'></script>
+            <script src= './scripts/calculate.js'></script>
             <script src= './scripts/plot/plot.js'></script>
             <script src= './scripts/plot/bar.js'></script>
             <script src= './scripts/plot/line.js'></script>
@@ -34,32 +36,25 @@
             <script>
             
             path_s = './input/survey.json';
-            path_p = './input/diagramme.json'
+            path_p = './input/diagramme.json';
+            path_c = './input/calculation.json';
             
             d3.json(path_s, function(survey) {
                 d3.json(path_p, function(howToPlot) {
-                    renderInputForm(survey);
-            
-                    d3.select('#submit').on('click', function() {
-                        
-                       userInput = catchUserInput(survey);
-                        // aggregated = aggregate(userInput);
-                        
-                        // Testdata
-                        aggregated = {}; tmp = [];
-                        for(i = 0; i < 5; i++) {    
-                           tmp.push(Math.random() * 100);        
-                        };
-                        aggregated['socialNetworks'] = tmp;  
-                        
-                        aggregated['income'] = [1400, 2000, 2100, 2100, 2000];  
-                        
-          
-                        for(i in aggregated){
-                            current = i;
-                            plot(aggregated[i], howToPlot[i]);
-                        }
-                        
+                    d3.json(path_c, function(cModel) {
+                        renderInputForm(survey);
+                
+                        d3.select('#submit').on('click', function() {
+                            
+                           userInput = catchUserInput(survey);
+                           aggregated = calculate(cModel, userInput);
+                           console.log(aggregated.income)
+                          
+                            for(i in aggregated){
+                                current = i;
+                                plot(aggregated.income, howToPlot[i]);
+                            }
+                        });    
                     });
                 });
 			});
