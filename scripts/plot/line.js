@@ -1,5 +1,6 @@
 function lineChart(){
     
+	
     // X-Scale
     var xScale = d3.scale.ordinal()
         .domain(range)
@@ -9,7 +10,7 @@ function lineChart(){
     
     // Y-Scale
     var yScale = d3.scale.linear()
-        .domain([0, d3.max(rData)])
+        .domain([0, 12500])
         .range([h, 0]);
         
      
@@ -36,17 +37,17 @@ function lineChart(){
     
     // Apend path 
     var path = d3.svg.line()
-        .x(function(d) {console.log(d[1]); return xScale(d[0])})
+        .x(function(d) {return xScale(d[0])})
         .y(function (d) {return yScale(d[1])})
         .interpolate('linear');
                  
     svg.append('path')
+		.attr('d', path(rData))
         .attr('class', 'line')
         .attr('fill', 'none')
         .attr('stroke', 'steelblue')
-        .attr('stroke-width', 3)
-        .attr('d', path(rData))
-
+        .attr('stroke-width', 3);
+        
         
     svg.append('line') 
        .attr('x1', xScale(40))

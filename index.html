@@ -48,11 +48,10 @@
                             
                            userInput = catchUserInput(survey);
                            aggregated = calculate(cModel, userInput);
-                           console.log(aggregated.income)
                           
                             for(i in aggregated){
                                 current = i;
-                                plot(aggregated.income, howToPlot[i]);
+                                plot(aggregated[i], howToPlot[i]);
                             }
                         });    
                     });

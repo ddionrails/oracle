@@ -1,10 +1,9 @@
-function plot(data, howToPlot){
+function plot(data, model){
     
     rData = data;
-    
-    console.log("Data: " + aggregated.income)
-    
-    
+	howToPlot = model;
+	
+	
     // Set margin, width, height and padding for chart
     margin = {top: 20, right: 20, bottom: 20, left: 120};
     w = 600 - margin.left - margin.right;
