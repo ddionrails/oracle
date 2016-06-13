@@ -6,10 +6,18 @@ function calculate(m, ui){
     
     for(i in model){
 
-        if(model[i].calculate == true){
-            outcome[i] = customizedCalc();
-        } else {
-            outcome[i] = model[i].data;
+        switch(model[i].type){
+            
+            case('line'):   if(model[i].calculate == true){
+                                outcome[i] = customizedCalc();
+                            } else {
+                                outcome[i] = defaultValuesbyRange();
+                            } break;
+
+            case('bar'):    outcome[i] = model[i].data;
+                            break;
+
+            default:        console.log('Error.')  
         }
     }
     return outcome; 
@@ -19,7 +27,7 @@ function calculate(m, ui){
 function customizedCalc(){
     
     /** Get Range Array **/
-    range = d3.range(model[i].range[0], model[i].range[1] + 1, model[i].range[2]);
+    var range = d3.range(model[i].range[0], model[i].range[1] + 1, model[i].range[2]);
     tmp =[];
    
     /** Foreach step in range, multiply coefficients with user input / range step itself **/ 
@@ -38,5 +46,20 @@ function customizedCalc(){
     return tmp; 
     
 }  
+
+function defaultValuesbyRange(){
+
+    /** Get Range Array **/
+    var range = d3.range(model[i].range[0], model[i].range[1] + 1, model[i].range[2]);
+    tmp =[];
+
+    for(j = 0; j < range.length; j++){
+        tmp.push([range[j], model[i].data[j]]);
+    }
+    return tmp;
+
+}
+
+
     
     

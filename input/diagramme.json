@@ -21,5 +21,12 @@
             "title": "Wie oft nutzen wir Facebook und Co?",
             "subTitle": "Ein Beispieltext passend zum Diagramm."
         }
+    },
+    "satisfaction":{
+        "type" : "line",
+        "text":{
+            "title": "Wie oft nutzen wir Facebook und Co?",
+            "subTitle": "Ein Beispieltext passend zum Diagramm."
+        }        
     }
 }

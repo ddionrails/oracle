@@ -1,20 +1,15 @@
 function lineChart(){
-    
-	
+
     // X-Scale
     var xScale = d3.scale.ordinal()
-        .domain(range)
-        .rangePoints([0, w], 0.5);
-        
-    distance = (xScale.range()[1] - xScale.range()[0])/2;    
+        .domain(rData.map(function(d){return d[0]}))
+        .rangePoints([0, w], 0.5); 
     
     // Y-Scale
     var yScale = d3.scale.linear()
-        .domain([0, 12500])
+        .domain([0, d3.max(rData.map(function(d){return d[1]}))])
         .range([h, 0]);
-        
-     
-    
+
     // X-Axis
     var xAxis = d3.svg.axis()
         .scale(xScale)

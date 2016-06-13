@@ -1,9 +1,8 @@
 function plot(data, model){
-    
+
     rData = data;
-	howToPlot = model;
-	
-	
+    howToPlot = model
+
     // Set margin, width, height and padding for chart
     margin = {top: 20, right: 20, bottom: 20, left: 120};
     w = 600 - margin.left - margin.right;
