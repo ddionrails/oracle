@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="section"> <div class="container"> <div class="row"> <div class="col-md-12"> <h1 class="text-center header">Was kann das SOEP ORACLE?</h1> <p class="text-center"></p></div></div><div class="row"> <div class="col-md-2 text-center"><i class="fa fa-3x fa-fw handy fa-eur"></i></div><div class="col-md-4"> <h3 class="text-left">Wie viel Geld wirst du verdienen?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div><div class="col-md-2 text-center"><i class="fa fa-3x handy fa-child"></i></div><div class="col-md-4"> <h3 class="text-left">Wie viele Kinder wirst du haben?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div></div><div class="row"> <div class="col-md-2 text-center"><i class="fa fa-3x fa-car handy"></i></div><div class="col-md-4"> <h3 class="text-left">Welches Auto wirst du fahren?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div><div class="col-md-2 text-center"><i class="fa fa-3x handy fa-asterisk"></i></div><div class="col-md-4 text-center"> <h3 class="text-left">Wie glücklich wirst du sein?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div></div><div class="row"><div class="col-md-12"><p class="paragraph text-center">Lorem ipsum dolor sit amet, consectetur adipisici elit, <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud </p></div></div></div></div>
+        <div id="about" class="section"> <div class="container"> <div class="row"> <div class="col-md-12"> <h1 class="text-center header">Was kann das SOEP ORACLE?</h1> <p class="text-center"></p></div></div><div class="row"> <div class="col-md-2 text-center"><i class="fa fa-3x fa-fw icon fa-eur"></i></div><div class="col-md-4"> <h3 class="text-left">Wie viel Geld wirst du verdienen?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div><div class="col-md-2 text-center"><i class="fa fa-3x icon fa-child"></i></div><div class="col-md-4"> <h3 class="text-left">Wie viele Kinder wirst du haben?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div></div><div class="row top-buffer"> <div class="col-md-2 text-center"><i class="fa fa-3x fa-car icon"></i></div><div class="col-md-4"> <h3 class="text-left">Welches Auto wirst du fahren?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div><div class="col-md-2 text-center"><i class="fa fa-3x icon fa-asterisk"></i></div><div class="col-md-4 text-center"> <h3 class="text-left">Wie glücklich wirst du sein?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div></div><div class="row top-buffer"><div class="col-md-12"><p class="paragraph text-center">Lorem ipsum dolor sit amet, consectetur adipisici elit, <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud </p></div></div></div></div>
         <div id="survey" class="section befragung">
             <div class="container">
                 <div class="row">
@@ -84,8 +84,8 @@
             </div>
         </div>
         <div class="section" id="auswertung"></div>
-        <div class="section befragung">
-            <div class="container"><div class="row"><div class="col-md-12"><div class="section"> <div class="container"> <div class="row"> <div class="col-md-6"> <h1>Erfahre mehr über das SOEP</h1> <h3>A subtitle</h3> <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p></div><div class="col-md-6"> <img src="https://www.diw.de/documents/bildarchiv/37/diw_02.c.239717.de/soep-logo.jpg" class="center-block img-responsive bild"> </div></div></div></div></div></div></div>
+        <div class="section">
+            <div id="soep" class="container"><div class="row"><div class="col-md-12"><div class="section"> <div class="container"> <div class="row"> <div class="col-md-6"> <h1>Erfahre mehr über das SOEP</h1> <h3>A subtitle</h3> <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p></div><div class="col-md-6"> <img src="https://www.diw.de/documents/bildarchiv/37/diw_02.c.239717.de/soep-logo.jpg" class="center-block img-responsive soep_logo"> </div></div></div></div></div></div></div>
         </div>
         <footer class="footer section">
             <div class="container">
@@ -133,14 +133,13 @@
                                 d3.select('#submit').on('click', function() {
                                 
                                 d3.selectAll('.auswertung').remove();
-        						
         						d3.select('#auswertung').append("section").html("<h1 class='header text-center auswertung'>Das ORACLE hat gesprochen.</h1>");
         						
                                    userInput = catchUserInput(survey);
                                    aggregated = calculate(cModel, userInput);
-          
         
                                     for(i in aggregated){
+                        
                                         current = i;
                                         plot(aggregated[i], howToPlot[i]);
                                     }

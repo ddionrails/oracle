@@ -5,8 +5,9 @@ function barChart(){
         composite = [rData[i], howToPlot.dataLabels[i]]; 
         data.push(composite);
     }
-    
+
     highlight = function(d){
+     
          if(d[1] == howToPlot.dataLabels[userInput[current]]){
             return 'red';            
         } else {

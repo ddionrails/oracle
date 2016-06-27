@@ -1228,7 +1228,7 @@ h2,
 h3,
 .h3 {
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 h1 small,
 .h1 small,
@@ -6776,10 +6776,6 @@ body {
   background-attachment: fixed;
 }
 /* PINGENDO COMMENT DO NOT REMOVE */
-.test {
-  font-size: 60;
-  font-weigth: bold;
-}
 .header {
   color: #05182A;
 }
@@ -6795,15 +6791,9 @@ body {
   font-size: 20;
   color: grey;
 }
-.icons {
-  font-size: 24;
-}
 .navbar {
   background: white;
   color: green;
-}
-.starheaer {
-  color: white;
 }
 .heading {
   font-size: 52;
@@ -6821,43 +6811,20 @@ body {
   background: none;
   color: white;
 }
-.test {
-  font-size: 160;
-  color: #cccccc;
-}
-.empty {
-  color: #27C490;
-  line-height: 50;
-}
 .footer {
   background: #05182A;
   color: white;
 }
-.icon {
-  color: #5F6D8D;
-}
-.empty2 {
-  color: #61E8C2;
-}
-.table {
-  line-height: 70;
-}
-.h2 {
-  font-size: 34;
-}
 .befragung {
   background: #ededed;
 }
-.handy {
+.icon {
   text-align: center;
   position: relative;
-  font-size: 160;
+  font-size: 120;
   color: grey;
 }
-.whitebackground {
-  background: white;
-}
-.bild {
+.soep_logo {
   padding: 40;
 }
 .button {
@@ -6911,5 +6878,8 @@ body {
   color: grey;
   padding-top: 50;
   padding-bottom: 100;
+}
+.top-buffer{
+    margin-top: 20;
 }
 
