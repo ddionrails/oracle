@@ -4,17 +4,21 @@ function plot(data, model){
     howToPlot = model
 
     // Set margin, width, height and padding for chart
-    margin = {top: 20, right: 20, bottom: 20, left: 120};
-    w = 600 - margin.left - margin.right;
-    h = (100 + 20 * rData.length) - margin.top - margin.bottom;
+    margin = {top: 10, right: 120, bottom: 20, left: 120};
+    w = 1000 - margin.left - margin.right;
+    h = 350 - margin.top - margin.bottom;
     barPadding = 1;
     
-    // Create SVG ELement and append to #chart
-    svg = d3.select('#chart')
+    
+	id = i
+	appendNewSection(id, howToPlot);
+    
+	// Create SVG ELement and append to #chart
+    svg = d3.select('#' + id)
                 .append('svg')
                 .attr('width', w + margin.left + margin.right)
                 .attr('height', h + margin.top + margin.bottom )
-                .attr('class', 'chart')
+                .attr('class', 'chart img-fluid')
                 .append('g')
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");	
     
@@ -28,8 +32,6 @@ function plot(data, model){
                                 break;            
         default:                console.log('Error.')
     }
-    
-    
 
 }
    

@@ -1,5 +1,5 @@
-function barChart(){
-   
+function barChart(){	
+    
     data = [];
     for(i = 0; i < rData.length; i++){
         composite = [rData[i], howToPlot.dataLabels[i]]; 
@@ -7,10 +7,10 @@ function barChart(){
     }
     
     highlight = function(d){
-        if(d[1] == howToPlot.dataLabels[userInput[current]]){
+         if(d[1] == howToPlot.dataLabels[userInput[current]]){
             return 'red';            
         } else {
-            return 'steelblue';
+            return '#05182A';
         }    
     }
    
@@ -61,6 +61,7 @@ function barChart(){
         .attr('width', function(d){return xScale(d[0])}) 
         .attr('height', (h / data.length) - barPadding);						
     
+   
     //Append Labels
     barHeight = (h / data.length) - barPadding; 
     labels = svg.selectAll('text')
@@ -71,5 +72,5 @@ function barChart(){
         .attr('x', function(d) {return xScale(d[0]) + 3})
         .attr('y', function(d) {return yScale(d[1]) + (barHeight/2) + 2})
         .text(function(d) {return (d3.round(d[0], 1))});	
-           
+      
 }

@@ -1,7 +1,7 @@
 {
     "income": {
         "type": "line",
-        "marker" : "age"
+        "marker" : "age",
         "range": [20, 100, 20],
         "calculate": true,
         "coef": {
@@ -10,13 +10,13 @@
             "byRange": 100
         }  
     },
-    "socialNetworks": {
+    "social": {
         "type": "bar",
         "calculate": false,
         "data": [1400, 1800, 500, 1400, 2000]
     },
     "satisfaction":{
-        "marker": age,
+        "marker": "age",
         "type": "line",
         "range": [0, 100, 10],
         "calcultae": false,

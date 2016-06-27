@@ -1,64 +1,151 @@
-<!DOCTYPE HTML>
-	<html lang='de'>
-		<head>
-			<title>SOEP ORACLE</title>
-			<meta charset='utf-8'>
-			
-			<!-- jQuery -->
-			<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
-			<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
-			
-			<!-- Bootstrap -->
-			<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>
-
-			<!-- D3.js -->
-			<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' charset='utf-8'></script>
-			<script src='http://d3js.org/d3.v3.min.js'></script>	
-            
-            <script src= './input/survey.json'></script>
-            <script src= './input/diagramme.json'></script>
-            <script src= './input/calculation.json'></script>
-            <script src= './scripts/inputForm.js'></script>
-			<script src= './scripts/catchUserInput.js'></script>
-            <script src= './scripts/calculate.js'></script>
-            <script src= './scripts/plot/plot.js'></script>
-            <script src= './scripts/plot/bar.js'></script>
-            <script src= './scripts/plot/line.js'></script>
-			
-		</head>
-
-		<body>
-        
-            <div id='survey'></div>
-			<button id='submit' type='submit' class='btn btn-primary'>Submit</button>
-            <div id='chart'></div>
-
-            <script>
-            
+<html><head>
+        <meta charset="utf-8">
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://gc.kis.scr.kaspersky-labs.com/1B74BD89-2A22-4B93-B451-1C9E1052A0EC/main.js" charset="UTF-8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="./bootstrap/style.css" rel="stylesheet" type="text/css">
+        <!-- D3.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="./input/survey.json"></script>
+        <script src="./input/diagramme.json"></script>
+        <script src="./input/calculation.json"></script>
+        <script src="./scripts/inputForm.js"></script>
+        <script src="./scripts/catchUserInput.js"></script>
+        <script src="./scripts/newSection.js"></script>
+        <script src="./scripts/calculate.js"></script>
+        <script src="./scripts/plot/plot.js"></script>
+        <script src="./scripts/plot/bar.js"></script>
+        <script src="./scripts/plot/line.js"></script>
+    </head><body>
+        <div class="cover">
+            <div class="navbar navbar-default navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand brand" href="#"><span>SOEP ORACLE</span></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#about">Was kann das ORACLE</a>
+                            </li>
+                            <li>
+                                <a href="#survey">Frage das ORACLE</a>
+                            </li>
+                            <li>
+                                <a href="#soep">Mehr über das SOEP</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="background-image-fixed cover-image" style="background-image : url('https://images.unsplash.com/photo-1442876906995-6761040d1f0b?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;s=8fc848dd82f0837198328c1c2a81ef51')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center heading">
+                        <h1 class="heading">SOEP ORACLE
+                            <br>
+                        </h1>
+                        <p>Frage das Orakel nach deiner Zukunft.</p>
+                        <p>
+                            <a class="btn btn-secondary btn-lg" href="#survey" role="button">Jetzt starten</a>
+                        </p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section"> <div class="container"> <div class="row"> <div class="col-md-12"> <h1 class="text-center header">Was kann das SOEP ORACLE?</h1> <p class="text-center"></p></div></div><div class="row"> <div class="col-md-2 text-center"><i class="fa fa-3x fa-fw handy fa-eur"></i></div><div class="col-md-4"> <h3 class="text-left">Wie viel Geld wirst du verdienen?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div><div class="col-md-2 text-center"><i class="fa fa-3x handy fa-child"></i></div><div class="col-md-4"> <h3 class="text-left">Wie viele Kinder wirst du haben?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div></div><div class="row"> <div class="col-md-2 text-center"><i class="fa fa-3x fa-car handy"></i></div><div class="col-md-4"> <h3 class="text-left">Welches Auto wirst du fahren?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div><div class="col-md-2 text-center"><i class="fa fa-3x handy fa-asterisk"></i></div><div class="col-md-4 text-center"> <h3 class="text-left">Wie glücklich wirst du sein?</h3> <p class="text-left">Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.</p></div></div><div class="row"><div class="col-md-12"><p class="paragraph text-center">Lorem ipsum dolor sit amet, consectetur adipisici elit, <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.<br> Ut enim ad minim veniam, quis nostrud </p></div></div></div></div>
+        <div id="survey" class="section befragung">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="header text-center">Beantworte dem SOEP ORACLE ein paar Fragen zu dir.</h1>
+                    </div>
+                </div>
+                <div id="befragung"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button id="submit" class="btn btn-primary pull-right ">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="auswertung"></div>
+        <div class="section befragung">
+            <div class="container"><div class="row"><div class="col-md-12"><div class="section"> <div class="container"> <div class="row"> <div class="col-md-6"> <h1>Erfahre mehr über das SOEP</h1> <h3>A subtitle</h3> <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p></div><div class="col-md-6"> <img src="https://www.diw.de/documents/bildarchiv/37/diw_02.c.239717.de/soep-logo.jpg" class="center-block img-responsive bild"> </div></div></div></div></div></div></div>
+        </div>
+        <footer class="footer section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h1 class="footer">SOEP ORACLE</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+                            <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+                            <br>Ut enim ad minim veniam, quis nostrud</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="text-info text-right">
+                            <br>
+                            <br>
+                        </p>
+                        <div class="row">
+                            <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 hidden-xs text-right">
+                                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
             path_s = './input/survey.json';
-            path_p = './input/diagramme.json';
-            path_c = './input/calculation.json';
-            
-            d3.json(path_s, function(survey) {
-                d3.json(path_p, function(howToPlot) {
-                    d3.json(path_c, function(cModel) {
-                        renderInputForm(survey);
-                
-                        d3.select('#submit').on('click', function() {
-                            
-                           userInput = catchUserInput(survey);
-                           aggregated = calculate(cModel, userInput);
-                          
-                            for(i in aggregated){
-                                current = i;
-                                plot(aggregated[i], howToPlot[i]);
-                            }
-                        });    
-                    });
-                });
-			});
- 
-			</script>
-			
-		</body>
-	</html> 
+                    path_p = './input/diagramme.json';
+                    path_c = './input/calculation.json';
+                    
+                    d3.json(path_s, function(survey) {
+                        d3.json(path_p, function(howToPlot) {
+                            d3.json(path_c, function(cModel) {
+                                renderInputForm(survey);
+                        
+                                d3.select('#submit').on('click', function() {
+                                
+                                d3.selectAll('.auswertung').remove();
+        						
+        						d3.select('#auswertung').append("section").html("<h1 class='header text-center auswertung'>Das ORACLE hat gesprochen.</h1>");
+        						
+                                   userInput = catchUserInput(survey);
+                                   aggregated = calculate(cModel, userInput);
+          
+        
+                                    for(i in aggregated){
+                                        current = i;
+                                        plot(aggregated[i], howToPlot[i]);
+                                    }
+                                });    
+                            });
+                        });
+        			});
+        </script></body></html>

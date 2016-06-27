@@ -40,7 +40,7 @@ function lineChart(){
 		.attr('d', path(rData))
         .attr('class', 'line')
         .attr('fill', 'none')
-        .attr('stroke', 'steelblue')
+        .attr('stroke', '#05182A')
         .attr('stroke-width', 3);
         
         

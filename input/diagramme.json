@@ -7,10 +7,11 @@
 		},
         "text":{
             "title": "Wie viel wirst du in 10 Jahren verdienen?",
-            "subTitle": "Ein Beispieltext passend zum Diagramm."
+            "subTitle": "Ein Beispieltext passend zum Diagramm.",
+			"paragraph": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         }
 	},
-	"socialNetworks":{
+	"social":{
 		"type": "bar",
 		"axisLabel": {
 			"x" : "",
@@ -19,14 +20,16 @@
 		"dataLabels": ["Täglich", "Mindestens 1 mal pro Woche", "Mindestens 1 mal pro Monat", "Seltener", "Nie"],
 		"text":{
             "title": "Wie oft nutzen wir Facebook und Co?",
-            "subTitle": "Ein Beispieltext passend zum Diagramm."
+            "subTitle": "Ein Beispieltext passend zum Diagramm.",
+			"paragraph": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         }
     },
     "satisfaction":{
         "type" : "line",
         "text":{
-            "title": "Wie oft nutzen wir Facebook und Co?",
-            "subTitle": "Ein Beispieltext passend zum Diagramm."
+            "title": "Wie glücklich bist du in 10 Jahren?",
+            "subTitle": "Ein Beispieltext passend zum Diagramm.",
+			"paragraph": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
         }        
     }
 }

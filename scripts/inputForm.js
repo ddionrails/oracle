@@ -47,10 +47,11 @@ function renderInputForm(model){
 
     /* Appends element to DOM */
     function append(string) {
-        
-        d3.select("#survey")
-            .append("text").text(model[i].text)
-            .append("form").html(string);
+
+        d3.select("#befragung")
+            .append("div").html("<div class='container'> <div class='row'> <div class='col-md-12'><h3>" + model[i].text + "</h3>" + string + "</div></div></div>")
+			.attr("class", "survey");
+
     }
 }
 
