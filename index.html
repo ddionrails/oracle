@@ -143,6 +143,17 @@
                                         current = i;
                                         plot(aggregated[i], howToPlot[i]);
                                     }
+                                    
+                                   $(window).on("resize", function() {
+                                    
+                                     charts = $(".chart")
+                                    aspect = charts.width() / charts.height()
+                                    targetWidth = charts.parent().width();
+                                    
+                                    charts.attr("width", targetWidth);
+                                    charts.attr("height", Math.round(targetWidth / aspect));
+                                   
+                                   }).trigger("resize");
                                 });    
                             });
                         });

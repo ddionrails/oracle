@@ -18,7 +18,9 @@ function plot(data, model){
                 .append('svg')
                 .attr('width', w + margin.left + margin.right)
                 .attr('height', h + margin.top + margin.bottom )
-                .attr('class', 'chart img-fluid')
+                .attr('viewBox', '0 0 ' + (w + margin.left + margin.right) + ' ' + (h + margin.top + margin.bottom))
+                .attr('perserveAspectRatio', 'xMinYMid')
+                .attr('class', 'chart')
                 .append('g')
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");	
     
@@ -34,4 +36,5 @@ function plot(data, model){
     }
 
 }
+
    
