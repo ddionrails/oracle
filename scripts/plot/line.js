@@ -1,5 +1,5 @@
 function lineChart(){
-
+    
     // X-Scale
     var xScale = d3.scale.ordinal()
         .domain(rData.map(function(d){return d[0]}))
@@ -45,14 +45,14 @@ function lineChart(){
         
         
     svg.append('line') 
-       .attr('x1', xScale(40))
-       .attr('x2', xScale(40))
+       .attr('x1', xScale(userInput[howToPlot.marker]))
+       .attr('x2', xScale(userInput[howToPlot.marker]))
        .attr('y1', 0)
        .attr('y2', h)
        .attr('stroke-width', 1)
        .attr('stroke', 'grey')
        .style('stroke-dasharray', ('2, 2'))  
-       .attr('fill', 'none');
+       .attr('fill', 'none')
 
 }
 
