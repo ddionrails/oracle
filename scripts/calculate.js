@@ -35,10 +35,21 @@ function customizedCalc(){
         
         sum = 0;
         for(c in model[i].coef){
-            if(c == 'byRange'){
-                sum += (model[i].coef.byRange * range[j])
+            
+            splitted = c.split('^');
+            criteria = /byRange\^\d*/
+            if(splitted.length > 1){
+                if(criteria.test(c)){
+                    sum += (model[i].coef[c] * Math.pow(range[j], splitted[1]))
+                } else {
+                    sum += (model[i].coef[c] * Math.pow(userInput[splitted[0]], splitted[1]));
+                }
             } else {
-                sum += (userInput[c] *  model[i].coef[c]);
+                if(c == 'byRange'){
+                    sum += (model[i].coef.byRange * range[j])
+                } else {
+                    sum += (userInput[c] * model[i].coef[c]);
+                } 
             }
         }
         tmp.push([range[j], sum])
